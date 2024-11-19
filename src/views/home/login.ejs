@@ -1,0 +1,648 @@
+<!-- https://www.flaticon.com/kr/free-icon/lock-variant_7794294?term=lock&page=1&position=3&origin=search&related_id=7794294 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!--- Tailwind CSS CDN 연결 --->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--tailwind CSS CDN-->
+  <link rel="stylesheet" href="css/home/style.css">
+  <!-- <link rel="stylesheet" href="../css/style.css"> -->
+
+    <!--Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+  />
+
+  <!-- Ripple Effect from cdn -->
+  <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" ></script>
+    <!--Remix icon cdn -->
+  <link href="
+  https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css
+  " rel="stylesheet">
+
+
+   <!--JQUERY CDN -->
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+   <!--hangul CDN -->
+  <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+
+   <!--fontawesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+    
+      <style>
+        [x-cloak] { display: none !important;}
+      </style>
+
+    <style type="text/tailwindcss">
+      @layer utilities {
+       .keyboard-layout{
+        @apply [&>div]:flex [&>div]:items-center [&>div]:justify-center 
+        [&>div]:gap-2 [&>div]:my-2;
+       }
+
+        .keyboard-btn {
+        @apply [&>button]:bg-gray-900 [&>button]:border [&>button]:w-14 [&>button]:p-2 [&>button]:text-white [&>button]:rounded-md [&>button]:text-center [&>button]:text-2xl;
+        }
+
+        .product-modal-row{
+          @apply flex gap-3 bg-white flex gap-3 py-5 my-2 border border-slate-200 rounded-lg px-5 shadow-md hover:scale-105 transition-all duration-200 [&>div>b]:block [&>div>span]:text-gray-400;
+        }
+
+        .product-modal-row-title {
+            @apply px-2 text-xs font-semibold leading-[48px] text-green-800 bg-green-100 rounded-full;
+        }
+
+        .product-modal-row-action{
+            @apply px-4 text-xs font-semibold leading-[48px] text-green-800 bg-cyan-200 rounded-md ml-5;
+        }
+
+        .modal-contents-container {
+         @apply mt-6 space-y-4;
+        }
+
+        
+
+            }
+      
+    </style>
+  
+<body class="h-screen flex-1 max-h-full overflow-y-auto overflow-hidden">
+
+    <!-- 아이디/비밀번호 찾기 -->
+    <!-- 모달 -->
+
+     <div class = "warning-modal justify-center flex items-center h-screen fixed w-full z-50 sm:top-1/4 hidden">
+           <div class="fixed inset-0 bg-gray-300 bg-opacity-75 z-20">
+
+           </div>
+
+           <!-- 모달 -->
+
+             <div class="sm:w-1/4 sm:h-screen flex items-end justify-center pt-4  px-4 pb-24 text-center sm:block sm:p-0 z-50">
+               <!-- 모달 패널 -->
+               <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                   <!-- 모달 컨텐츠 -->
+                   <div class="sm:flex sm:items-start">
+                     <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                       <!-- Heroicon name: outline/exclamation -->
+                       <svg width="64px" height="64px" class="h-6 w-6 text-red-600" stroke="currentColor" fill="none" viewBox="0 0 24.00 24.00" xmlns="http://www.w3.org/2000/svg" stroke="#ef4444" stroke-width="0.45600000000000007">
+                         <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V8C11.25 7.58579 11.5858 7.25 12 7.25Z" fill="#ef4444"></path>
+                         <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="#ef4444"></path>
+                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.2944 4.47643C9.36631 3.11493 10.5018 2.25 12 2.25C13.4981 2.25 14.6336 3.11493 15.7056 4.47643C16.7598 5.81544 17.8769 7.79622 19.3063 10.3305L19.7418 11.1027C20.9234 13.1976 21.8566 14.8523 22.3468 16.1804C22.8478 17.5376 22.9668 18.7699 22.209 19.8569C21.4736 20.9118 20.2466 21.3434 18.6991 21.5471C17.1576 21.75 15.0845 21.75 12.4248 21.75H11.5752C8.91552 21.75 6.84239 21.75 5.30082 21.5471C3.75331 21.3434 2.52637 20.9118 1.79099 19.8569C1.03318 18.7699 1.15218 17.5376 1.65314 16.1804C2.14334 14.8523 3.07658 13.1977 4.25818 11.1027L4.69361 10.3307C6.123 7.79629 7.24019 5.81547 8.2944 4.47643ZM9.47297 5.40432C8.49896 6.64148 7.43704 8.51988 5.96495 11.1299L5.60129 11.7747C4.37507 13.9488 3.50368 15.4986 3.06034 16.6998C2.6227 17.8855 2.68338 18.5141 3.02148 18.9991C3.38202 19.5163 4.05873 19.8706 5.49659 20.0599C6.92858 20.2484 8.9026 20.25 11.6363 20.25H12.3636C15.0974 20.25 17.0714 20.2484 18.5034 20.0599C19.9412 19.8706 20.6179 19.5163 20.9785 18.9991C21.3166 18.5141 21.3773 17.8855 20.9396 16.6998C20.4963 15.4986 19.6249 13.9488 18.3987 11.7747L18.035 11.1299C16.5629 8.51987 15.501 6.64148 14.527 5.40431C13.562 4.17865 12.8126 3.75 12 3.75C11.1874 3.75 10.4379 4.17865 9.47297 5.40432Z" fill="#ef4444"></path>
+                       </svg>
+                     </div>
+                     <div class="mt-3 text-center sm:mt-0 sm:ml-6 sm:text-left">
+                       <h3 class="text-lg leading-6 font-medium text-gray-900" > 메세지 </h3>
+                       <div class="mt-2">
+                         <p class="warning-modal-text text-sm text-gray-500"> 인증번호가 일치하지 않습니다.</p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+               </div>
+             </div>
+
+         </div>
+
+
+
+        <div class = "suc-modal justify-center flex items-center h-screen fixed w-full z-50 sm:top-1/4 hidden">
+           <div class="fixed inset-0 bg-gray-300 bg-opacity-75 z-20">
+
+           </div>
+
+           <!-- 모달 -->
+           <div class="sm:w-1/4 sm:h-screen flex items-end justify-center pt-4  px-4 pb-24 text-center sm:block sm:p-0 z-50">
+            <!-- 모달 패널 -->
+            <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <!-- 모달 컨텐츠 -->
+                <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10">
+
+                    <i class="text-green-400 fa-2x fa-regular fa-circle-check"></i>
+                  </div>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-6 sm:text-left">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" > 메세지 </h3>
+                    <div class="mt-2">
+                      <p class="suc-modal-text text-sm text-gray-500"> 인증번호가 일치하지 않습니다.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+         </div>
+    
+    <div class=" w-full h-screen fixed flex items-center justify-center transition-all duration-300 find-modal hidden">
+      <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+      <div class=" bg-white rounded-lg p-6 w-96 max-w-full shadow-lg transform">
+            <!-- 모달 헤더 -->
+            <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                <h2 class="text-xl font-semibold">아이디/비밀번호 찾기</h2>
+                <button class="text-gray-500 hover:text-gray-700 find-exit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+          <!-- 모달 콘텐츠 & info라는 클래스를 document.queryselectorAll로 불러와서 인덱스를 정의하는 것임-->
+            <div class="mt-6 space-y-4">
+              <span>
+                <input type="text"  id="searchName" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2 info" placeholder="이름">
+                <input type="text"  id="searchPhone" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2 info" placeholder="전화번호">
+                 <button id = "searchSend" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 block my-2 w-full">인증번호 전송</button>
+                <input type="text" id="certification" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2 info" placeholder="인증번호">
+                <button id="confirm" class="bg-gray-900 text-gray-100 px-4 py-2 rounded-lg hover:bg-black transition duration-300 block my-2 w-full">
+                  인증번호 확인
+                  </button>
+              </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 입실 기능  -->
+    <div class="z-10 h-screen fixed flex items-center justify-center checkin-modal  w-full hidden">
+    <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+    
+          <div class=" bg-white rounded-lg p-6 shadow-lg transform transition-all duration-300">
+              <!--입실 헤더 -->
+              <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                  <h2  id="UserName" class="text-xl font-semibold">이용권 선택</h2>
+                  <button class="text-gray-500 hover:text-gray-700 checkin-exit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x get-out">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                  </button>
+              </div>
+
+              <!--입실 Content -->
+              <div  class="mt-6 space-y-4 ">
+                <span >
+                      <div id="useSet" class="[&>div]:flex [&>div]:gap-3 [&>div]:bg-white [&>div]:flex gap-3 [&>div]:py-5 [&>div]:my-2 [&>div]:border [&>div]:border-slate-200 [&>div]:rounded-lg [&>div]:px-5 [&>div]:shadow-md [&>div:hover]:scale-105 [&>div]:transition-all [&>div]:duration-200 [&>div>div>b]:block [&>div>div>span]:text-gray-400" >
+
+
+
+
+                         </div>
+
+                         <span class="block text-xs font-semibold leading-[48px] text-blue-800 bg-blue-100 text-center rounded-lg">
+                               <a href="/productList"> 이용권 구매  </a>  </span>
+                              </span>
+              </div>
+
+
+
+          </div>
+      </div>
+
+
+
+      <!-- 퇴실 기능  -->
+      <div class="fixed z-10 flex items-center justify-center checkout-modal hidden">
+          <div class=" bg-white rounded-lg p-6 w-96 max-w-full shadow-lg transform transition-all duration-300">
+              <!--퇴실 헤더 -->
+              <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                  <h2 class="text-xl font-semibold">퇴실</h2>
+                  <button class="text-gray-500 hover:text-gray-700 checkout-exit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x get-out">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                  </button>
+              </div>
+
+              <!--퇴실 콘텐츠 -->
+              <div class="modal-contents-container">
+
+                      <div class="modal-contents">
+                            <div class = "product-modal-row">
+                              <span class="product-modal-row-title">고정석</span>
+                              <div><b>2번 좌석</b><span>8시간 35분 남음</span>
+                            </div>
+                              <span class="product-modal-row-action">퇴실</span>
+                          </div>
+
+                        <div class = "product-modal-row ">
+                            <span class="product-modal-row-title ">자유석</span>
+                            <div><b>2번 좌석</b><span>8시간 35분 남음</span>
+                          </div>
+                            <span class="product-modal-row-action">퇴실</span>
+                        </div>
+
+                        <div class = "product-modal-row">
+                            <span class="product-modal-row-title">고정석</span>
+                            <div><b>2번 좌석</b><span>8시간 35분 남음</span>
+                          </div>
+                            <span class="product-modal-row-action">퇴실</span>
+                        </div>
+
+                   </div>
+         
+              </div>
+
+
+
+          </div>
+      </div>
+
+    
+    
+  <div x-data="{ openTab: 1 }" class="p-4 flex justify-center items-center h-auto ">
+    <div class="w-full md:w-1/2 mx-auto ">
+       
+        <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md flex-1">
+            <button x-on:click="openTab = 1" :class="{ 'bg-black text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">로그인</button>
+            <button x-on:click="openTab = 2" :class="{ 'bg-black text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">문열기</button>
+          <button x-on:click="openTab = 3" :class="{ 'bg-black text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">로그아웃</button>
+        </div>
+  
+  <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white rounded-lg border-black flex-1">
+
+
+    <!-- 컨테이너 -->
+    <div id="tab1" class="flex flex-col shadow-xl md:bg-gray-100 w-full ">
+        <!-- 카드 컨테이너 -->
+        <div class="grid place-items-center mx-2 my-6 ">
+  
+
+
+            <!-- 카드 -->
+            <div class=" 
+                w-full px-6 py-10 sm:px-10 sm:py-6 bg-white rounded-lg">
+
+                <!-- 카드 타이틀 -->
+                   <h3 class="font-bold text-3xl">BEAN<span class="text-[#6ab04c] text-3xl">STALK</span></h3>
+                
+                <h2 class="mt-3 text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+                    로그인
+                </h2>
+
+                <div class="mt-10">
+                    <!-- 전화번호 인풋 -->
+                    <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">전화번호</label>
+                    <img src="">
+                    <input id="PHONE" type="email" name="email" placeholder="전화번호를 입력해주세요" autocomplete=""
+                        class="block w-full py-3 px-8 mt-2 
+                        text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-phone id info"
+                        required />
+
+                    <!-- 비밀번호 인풋 -->
+                    <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">비밀번호</label>
+                    <input id="PSWORD" type="password" name="password" placeholder="비밀번호를 입력해주세요" autocomplete="current-password"
+                        class="block w-full py-3 px-8 mt-2 
+                        text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-lock password info"
+                        required />
+
+                    <!-- 로그인 버튼 -->
+                    <button
+                        id = "BUTTON" class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                        font-medium text-white uppercase
+                        focus:outline-none hover:shadow-none ring ring-gray-400 focus:ring-gray-500">
+                        로그인
+                    </button>
+
+                    <!-- 기타 경로 -->
+                    <div class="flex justify-between mt-8 sm:mb-4 text-sm text-center">
+                        <a href="#find-modal" class="flex-2 underline find-anchor">
+                            아이디/비밀번호 찾기
+                        </a>
+
+                        <a href="/certification" class="flex-2 underline">
+                           회원가입
+                        </a>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+            <!--상품 구매 탭 종료 및 문열기 탭 시작-->
+        <div x-cloak x-show="openTab === 2" class="transition-all duration-300 bg-white rounded-lg shadow-md">
+            <!-- 컨테이너 -->
+            <div id="tab2" class="flex flex-col shadow-xl md:bg-gray-100 w-full">
+                <!-- 카드 컨테이너 -->
+                <div class="grid place-items-center mx-2 my-6 ">
+
+
+
+                    <!-- 인증 카드 -->
+                    <div class=" 
+                        w-full px-6 py-10 sm:px-10 sm:py-6 bg-white rounded-lg">
+
+                        <!-- 카드 타이틀 -->
+                          <h3 class="font-bold text-3xl">BEAN<span class="text-[#6ab04c] text-3xl">STALK</span></h3>
+                        <h2 class="mt-3 text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+                            문열기
+                        </h2>
+
+                        <div class="mt-10">
+                            <!-- 전화번호 인풋 -->
+                            <label  for="email" class="block text-xs font-semibold text-gray-600 uppercase">휴대폰 번호 끝 네자리</label>
+                            <img src="">
+                            <input id="enterId" type="email" name="email" placeholder="휴대폰 번호 끝 네자리" 
+                                class="block w-full py-3 px-8 mt-2 
+                                text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-phone id info"
+                                required />
+
+                            <!-- 비밀번호 인풋 -->
+                            <label  for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">비밀번호</label>
+                            <input  id="enterPassword" type="password" name="password" placeholder="비밀번호를 입력해주세요" autocomplete="current-password"
+                                class="block w-full py-3 px-8 mt-2 
+                                text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-lock password info"
+                                required />
+
+                            <!-- 문열기 버튼 -->
+                            <button id = "enterNext"
+                                class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                                font-medium text-white uppercase
+                                focus:outline-none hover:shadow-none ring ring-gray-400 focus:ring-gray-500">
+                                문열기
+                            </button>
+
+                            <!-- 기타 경로 -->
+                            <div class="flex justify-between mt-8 sm:mb-4 text-sm text-center">
+                                <a href="#find-modal" class="flex-2 underline find-anchor">
+                                    아이디/비밀번호 찾기
+                                </a>
+
+                                <a href="/certification" class="flex-2 underline">
+                                   회원가입
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!--문열기 탭 종료 및 퇴실 탭 시작-->
+
+        <div x-cloak x-show="openTab === 3" class="transition-all duration-300 bg-white rounded-lg shadow-md">
+            <!-- 컨테이너 -->
+            <div id="tab3" class="flex flex-col shadow-xl md:bg-gray-100 w-full">
+                <!-- 카드 컨테이너-->
+                <div class="grid place-items-center mx-2 my-6 ">
+
+
+
+                    <!-- 카드 -->
+                    <div class=" 
+                        w-full px-6 py-10 sm:px-10 sm:py-6 bg-white rounded-lg">
+
+                        <!-- 카드 타이틀 -->
+                          <h3 class=" font-bold text-3xl">BEAN<span class="text-[#6ab04c] text-3xl">STALK</span></h3>
+                        <h2 class="mt-3 text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+                            로그아웃
+                        </h2>
+
+                        <div class="mt-10">
+                            <!-- 이메일 인풋 -->
+                            <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">전화번호</label>
+                            <img src="">
+                            <input id ="logoutPhone"type="email" name="email" placeholder="전화번호를 입력해주세요" autocomplete=""
+                                class="block w-full py-3 px-8 mt-2 
+                                text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-phone id info"
+                                required />
+
+                            <!-- 비밀번호 인풋 -->
+                            <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">비밀번호</label>
+                            <input id="logoutPassword" type="password" name="password" placeholder="비밀번호를 입력해주세요" autocomplete="current-password"
+                                class="block w-full py-3 px-8 mt-2 
+                                text-gray-800 appearance-none border-b-2 border-gray-100 focus:text-gray-500 focus:outline-none focus:border-black/30 bg-lock password info"
+                                required />
+
+                            <!-- 로그아웃 버튼 -->
+                            <button id="logoutButton"
+                                class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                                font-medium text-white uppercase
+                                focus:outline-none hover:shadow-none ring ring-gray-400 focus:ring-gray-500" id="logoutButton">
+                                로그아웃
+                            </button>
+
+                            <!-- 기타 경로-->
+                            <div class="flex justify-between mt-8 sm:mb-4 text-sm text-center">
+                                <a href="#find-modal" class="flex-2 underline find-anchor">
+                                    아이디/비밀번호 찾기
+                                </a>
+
+                                <a href="/certification" class="flex-2 underline">
+                                   회원가입
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           <!--퇴실 탭 종료-->
+        
+   
+  </div>
+  </div>
+  <!--회원 정보 수정 -->
+  <div class=" flex items-center justify-center z-30 change-modal h-screen fixed">
+
+    <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+
+
+    <div class="bg-white rounded-lg p-6 w-96 max-w-full shadow-lg transform transition-all duration-300">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+            <h2 class="text-xl font-semibold">비번수정</h2>
+
+        </div>
+
+        <!-- Modal Content -->
+        <div class="mt-6 space-y-4">
+          
+
+                       <div x-data="{ openTab: 1 }">
+              <div class="mx-auto ">
+
+               
+
+            </div>
+              </div>
+             <!--남자/여자 선택 부분 종료-->
+
+            
+            <input type="text" id="changPhone" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="전화번호">
+            <input type="text" id="changPsword" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="비밀번호">
+            <input type="text" id="changConfirm-psword" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="비밀번호 확인">
+
+            <p><button id="changButton" class="bg-gray-900 text-gray-100 px-4 py-2 rounded-lg hover:bg-black transition duration-300 block my-2 w-full">
+             변경하기
+              </button></p>
+            </span>
+        </div>
+    </div>
+</div>
+     <!-- 가상 키보드 시작-->
+
+      <!--keyboard-container 클래스명 수정. *240706에 z-index 제거함-->
+      <div class="justify-center items-center hidden md:flex px-3 rounded-lg py-2 mt-10 z-50 ">
+        <div class="hidden">
+          <textarea></textarea>
+        </div>
+        
+       <div class="bg-black/90 p-3 rounded-lg flex items-center justify-center flex-col [&>div]:m-1 [&>div>button]:bg-gray-900 [&>div>button]:border [&>div>button]:text-white [&>div>button]:rounded-md [&>div>button]:text-center">
+
+         <!--요 바로 위에 있는 거는 맨 윗줄과 아랫줄만 통제함..-->
+
+         <div class="flex items-center justify-center gap-2 [&>button]:w-14 [&>button]:p-2 [&>button]:text-2xl">
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button class="btn">0</button>
+      
+       </div>
+
+
+          <div class="en-keyboard keyboard-layout">
+             <div class="keyboard-btn">
+              <button class="btn en-btn">q</button>
+              <button class="btn en-btn">w</button>
+              <button class="btn en-btn">e</button>
+              <button class="btn en-btn">r</button>
+              <button class="btn en-btn">t</button>
+              <button class="btn en-btn">y</button>
+              <button class="btn en-btn">u</button>
+              <button class="btn en-btn">i</button>
+              <button class="btn en-btn">o</button>
+              <button class="btn en-btn">p</button>
+            </div>
+
+            <div class="keyboard-btn">
+             <button class="btn en-btn">a</button>
+             <button class="btn en-btn">s</button>
+             <button class="btn en-btn">d</button>
+             <button class="btn en-btn">f</button>
+             <button class="btn en-btn">g</button>
+             <button class="btn en-btn">h</button>
+             <button class="btn en-btn">j</button>
+             <button class="btn en-btn">k</button>
+             <button class="btn en-btn">l</button>
+           </div>
+
+            <div class="keyboard-btn">
+             <button class="en-shift !w-20"><i class="fa-solid fa-arrow-up"></i></button>
+            <button class="btn en-btn">z</button>
+             <button class="btn en-btn">x</button>
+             <button class="btn en-btn">c</button>
+             <button class="btn en-btn">v</button>
+             <button class="btn en-btn">b</button>
+             <button class="btn en-btn">n</button>
+             <button class="btn en-btn">m</button>
+                <button class="delete p-1"><i class="fa-solid fa-arrow-right rotate-180"></i></button>
+           </div>
+         </div>
+
+
+
+          <div class="ko-keyboard keyboard-layout hidden ">
+            <div class="keyboard-btn">
+              <button class="btn fortis">ㅂ</button>
+                <button class="btn fortis">ㅈ</button>
+                <button class="btn fortis">ㄷ</button>
+                <button class="btn fortis">ㄱ</button>
+                <button class="btn fortis">ㅅ</button>
+
+              <button class="btn fortis hidden">ㅃ</button>
+                <button class="btn fortis hidden">ㅉ</button>
+                <button class="btn fortis hidden">ㄸ</button>
+                <button class="btn fortis hidden">ㄲ</button>
+                <button class="btn fortis hidden">ㅆ</button>
+                <button class="btn">ㅛ</button>
+                <button class="btn">ㅕ</button>
+                <button class="btn">ㅑ</button>
+                <button class="btn">ㅐ</button>
+                <button class="btn">ㅔ</button>
+            </div>
+
+             <div class="keyboard-btn">
+              <button class="btn">ㅁ</button>
+              <button class="btn">ㄴ</button>
+              <button class="btn">ㅇ</button>
+              <button class="btn">ㄹ</button>
+              <button class="btn">ㅎ</button>
+              <button class="btn">ㅗ</button>
+              <button class="btn">ㅓ</button>
+              <button class="btn">ㅏ</button>
+              <button class="btn">ㅣ</button>
+            </div>
+
+
+
+             <div class="keyboard-btn">
+                    <button class="ko-shift !w-20"><i class="fa-solid fa-arrow-up"></i></button>
+            <button class="btn">ㅋ</button>
+             <button class="btn">ㅌ</button>
+             <button class="btn">ㅊ</button>
+             <button class="btn">ㅍ</button>
+             <button class="btn">ㅠ</button>
+             <button class="btn">ㅜ</button>
+             <button class="btn">ㅡ</button>
+                    <button class="delete p-1"><i class="fa-solid fa-arrow-right rotate-180"></i></button>
+          </div>
+
+         </div>
+
+
+          <div class="[&>button]:text-2xl flex gap-4">
+           <button class="translate p-2">한/영</button>
+           <button class="space px-24 py-2">Space</button>
+         </div>
+          </div>
+
+
+
+      </div>
+
+     <!-- 가상 키보드 종료-->
+
+    <footer class="footer bg-[#EFEFEF] flex items-center justify-between flex-shrink-0 p-4 border-t max-h-14">
+      <div>BEANSTALK &copy; 2024</div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+
+
+        <script src="js/home/login.js" defer></script>
+</body>
+</html>  

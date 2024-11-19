@@ -1,0 +1,450 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+/* Fontawesome 4.7 */
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+html {
+  width:100%;
+  height:100%;
+}
+body {
+  width: 100%;
+  height:100%;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  line-height: 1.5em;
+  margin: 0;
+  font-weight: 400;
+  background-color: #eee;
+  font-size: 18px;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 
+    "header header header"
+    "modal-container modal-container modal-container"
+    "icon-container icon-container icon-container"
+    "room_1-1 information room_1-2"
+    "room_2-1 room_2-2 room_2-3"
+    "room_3-1 lockerRoom room_3-2"
+    "room_4-1 lockerRoom room_4-2"
+    "studyLounge studyLounge room_5-1";
+  grid-column-gap: 10px;
+}
+
+.modal-container{
+  grid-area : modal-container;
+}
+
+.terrace{
+  grid-area: terrace;
+  border: 3px solid gray;
+  display: inline-block;
+  height: 35vh;
+  width: 40%;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+
+}
+
+.room_1-1{
+  grid-area: room_1-1;
+}
+
+.room_1-2{
+  grid-area: room_1-2;
+}
+
+.room_2-1{
+  grid-area: room_2-1;
+}
+
+.room_2-2{
+  grid-area: room_2-2;
+}
+
+.room_2-3{
+  grid-area: room_2-3;
+}
+
+.room_3-1{
+  grid-area: room_3-1;
+}
+
+.room_3-2{
+  grid-area: room_3-2;
+}
+
+.room_4-1{
+  grid-area: room_4-1;
+}
+
+.room_4-2{
+  grid-area: room_4-2;
+}
+
+.room_5-1{
+  grid-area: room_5-1;
+}
+
+.studyLounge{
+  grid-area: studyLounge;
+  border: 3px solid gray;
+  display: inline-block;
+  height: 30vh;
+  width: 800px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40px;
+  padding-bottom: 80px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sc-row{
+    display:flex;
+    justify-content : space-between;
+    width: 100%;
+}
+
+.sc-container{
+  display:inline-block;
+  width: 100%;
+}
+
+.sc-seats{
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  background-color: #f5d08a;
+  position: relative;
+}
+
+.sc-seats-number{
+  border: 3px solid #ffaa28;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  border-radius: 5px;
+  top: 50%; 
+  left: 50%;
+  z-index: 3;
+  background-color: green;
+  text-align: center;
+  font-size: 100%;
+  line-height: 40px;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 768px){
+  .sc-seats{
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    background-color: #f5d08a;
+    position: relative;
+  }
+
+  .sc-seats-number{
+    border: 3px solid #ffaa28;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 5px;
+    top: 50%; 
+    left: 50%;
+    z-index: 3;
+    background-color: green;
+    text-align: center;
+    font-size: 100%;
+    line-height: 40px;
+    transform: translate(-50%, -50%);
+  }
+
+  .studyLounge{
+    grid-area: studyLounge;
+    border: 3px solid gray;
+    display: inline-block;
+    height: 300px;
+    width: 800px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    padding-bottom: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+
+
+header {
+  grid-area: header;
+}
+
+a {
+  text-decoration: none;
+  color: #222
+}
+
+.icon-container{
+  align-items: center;
+  padding-top: 10px;
+  background-color: #111c52;
+  grid-area: icon-container;
+}
+
+.icon{
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.icon-info{
+  margin: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+
+
+.icon-wrap {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.room-container {
+  border: 3px solid gray;
+  display: inline-block;
+  height: 300px;
+  width: 70%;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  min-width: 300px;
+   max-width: 308px;
+
+  
+}
+
+.information-container{
+  border: 7px solid gray;
+  display: inline-block;
+  height: 300px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 300px;
+  box-sizing: border-box;
+  text-align: center;
+  grid-area: information;
+  min-width: 300px;
+  max-width: 308px;
+   overflow: hidden;
+}
+
+.information{
+  font-size: 20px;
+  font-weight: bold;
+  color: gray;
+  width: 100%;
+  display: inline-block;
+}
+
+.lockerRoom{
+  grid-area: lockerRoom;
+}
+
+
+
+.left-room-name {
+  background-color: gray;
+  border-radius: 5px;
+  display: inline-block;
+  height: 3.5vh;
+  width: 22%;
+  position: absolute;
+  top: -5%;
+  left: 60%;
+  color: white;
+  text-align: center;
+  line-height: -100%;
+  box-sizing: border-box;
+  font-size: 100%;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  min-height: 35px;
+
+}
+
+.right-room-name {
+  background-color: gray;
+  border-radius: 5px;
+  display: inline-block;
+  height: 3.5vh;
+  width: 22%;
+  position: absolute;
+  top: -5%;
+  left: 15%;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 100%;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: -100%;
+  min-height: 35px;
+
+}
+
+.center-room-name {
+  background-color: gray;
+  border-radius: 5px;
+  display: inline-block;
+  height: 3.5vh;
+  width: 22%;
+  position: absolute;
+  top: -5%;
+  left: 37%;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  line-height: -100%;
+  min-height: 35px;
+
+}
+
+
+header {
+  border-bottom: 1px solid lightgray;
+  background-color: #fff;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  box-sizing: border-box;
+}
+
+section {
+  height: calc(100vh - 60px);
+  position: relative;
+}
+
+
+
+.right-door-icon {
+  color: gray;
+  position: absolute;
+  left: 95%;
+  top: 40%;
+  z-index: 3;
+}
+
+.left-door-icon {
+  color: gray;
+  position: absolute;
+  top: 120px;
+  left: -5%;
+  z-index: 3;
+}
+
+.seats-icon{
+  border: 2px solid white;
+  display: inline-block;
+  border-radius: 3px;
+  width: 14px;
+  height: 14px;
+}
+
+.seats{
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 100%;
+  height: 90px;
+  display: inline-block;
+  background-color: #f5d08a;
+  position: relative;
+}
+
+.seats-number{
+  border: 3px solid #ffaa28;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  border-radius: 5px;
+  top: 30%;
+  right: -20%;
+  z-index: 3;
+  background-color: green;
+  text-align: center;
+  font-size: 100%;
+  line-height: 40px;
+  
+}
+
+
+.seats-container{
+  margin: 20px;
+  width: 30%;
+}
+
+.table {
+  background-color: gray;
+  border-radius: 5px;
+  display: inline-block;
+  height: 36px;
+  width: 200px;
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 24px;
+  padding-left: 27px;
+  padding-right: 27px;
+  line-height: 36px;
+}
+
+.elevator {
+  background-color: gray;
+  border-radius: 5px;
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  margin-top: 60px;
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 24px;
+  line-height: 80px;
+}

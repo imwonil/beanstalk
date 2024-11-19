@@ -1,0 +1,251 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box
+}
+
+body {
+  
+  line-height: 1.5;
+  font-family: Lato, sans-serif;
+  background-color: #cfd8dc;
+
+}
+
+.note {
+  font-size: calc(0.5vw + 0.75rem);
+  text-align: center;
+  opacity: 0.5;
+}
+
+.calendar-wrap {
+  width: 100%;
+  padding: 0.75em;
+  margin: auto;
+  font-size: 4vw;
+  background-color: #fff;
+  border-radius: 1.5em;
+  user-select: none;
+  box-shadow:
+    0 0.0625em 0.25em rgba(0,20,50,0.2),
+    0 0.5em 0.5em 0.125em rgba(0,20,50,0.1);
+}
+
+@media (min-width: 500px) {
+  .calendar-wrap {
+    width: 100%;
+    font-size: 1.25rem;
+  }
+}
+
+.pagination-wrap {
+
+  padding: 0.75em;
+  margin: auto;
+  font-size: 4vw;
+  background-color: #fff;
+  border-radius: 1.5em;
+  user-select: none;
+  box-shadow:
+    0 0.0625em 0.25em rgba(0,20,50,0.2),
+    0 0.5em 0.5em 0.125em rgba(0,20,50,0.1);
+}
+
+@media (min-width: 500px) {
+  .pagination-wrap {
+    width: 500px;
+    font-size: 1.25rem;
+  }
+}
+
+
+.page-header{
+  margin-bottom: 0.75em;
+  font-weight: normal;
+  font-size: 1.25em;
+  text-align: center;
+  margin : 1rem;
+}
+
+.month-year {
+  margin-bottom: 0.75em;
+  font-weight: normal;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.calendar {
+  table-layout: fixed;
+  width: 100%;
+  margin-bottom: 0.75em;
+  overflow: hidden;
+  border-collapse: collapse;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calendar-head{
+  width: 420px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.day-title, .prev-arrow, .next-arrow{
+  height: 4em;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.0625em;
+  box-shadow:
+    inset 0 -0.875em #fff,
+    inset 0 -1em rgba(0,20,50,0.1);
+}
+
+.day {
+  position: relative;
+  height: 3em;
+}
+
+.day-gray {
+  color: gray;
+}
+
+.day-actived{
+  color: white;
+  background-color: black;
+}
+
+.day:focus {
+  outline: none;
+}
+
+
+.day-number {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  border-radius: 50%;
+}
+
+.day.prev-mon .day-number,
+.day.next-mon .day-number {
+  color: rgba(0,0,0,0.3);
+}
+
+  
+.pagination {
+    margin: 0 auto;
+    vertical-align: top;
+    width: 100%;
+  text-align: center;
+}
+
+  .blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow:hidden;
+  } 
+
+.sprite:focus {
+  background-color: black;
+}
+
+
+
+
+.display-none{
+  display: none;
+}
+  
+.pagination a:hover {
+    background-color: #888;
+    color: #fff;
+    border-color: #000;
+  }
+
+.focused-page{
+  background-color: #888;
+  color: #fff;
+  border-color: #000;
+}
+
+
+.page-group {
+  display : inline;
+}
+
+  .pagination .active {
+    background-color: #333;
+    color: #fff;
+    border-color: #000;
+  }
+ 
+
+
+
+/*table related option*/
+
+.chargedTable {
+  margin-top : 1rem;
+  width : 100%;
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
+
+/*@media all and (max-width: 768px) {
+
+table, thead, tbody, th, td, tr {
+  display: block;
+}
+
+th {
+  text-align: right;
+}
+
+table {
+  position: relative; 
+  padding-bottom: 0;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+thead {
+  float: left;
+  white-space: nowrap;
+}
+
+tbody {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+tr {
+  display: inline-block;
+  vertical-align: top;
+}
+
+th {
+  border-bottom: 1px solid #a39485;
+}
+
+td {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+}*/
+ 

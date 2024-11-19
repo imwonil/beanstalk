@@ -1,0 +1,31 @@
+{
+  "name": "courageous-jeans-lick-d8lfe",
+  "productName": "courageous-jeans-lick-d8lfe",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "wonil",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./bin/www.js",
+    "build:win64": "electron-builder --win --x64"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "debug": "^4.3.7",
+    "ejs": "^3.1.10",
+    "electron-is-dev": "^3.0.1",
+    "express": "^4.19.2",
+    "hangul-js": "^0.2.6",
+    "moment": "^2.30.1",
+    "mqtt": "^5.6.2",
+    "mysql": "^2.18.1",
+    "solapi": "^5.3.1",
+    "store": "^2.0.12"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-packager": "^17.1.2"
+  }
+}

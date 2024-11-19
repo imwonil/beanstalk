@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+   <link rel="stylesheet" href="../css/style.css">
+
+  <!--- Tailwind CSS CDN 연결 --->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--tailwind CSS CDN-->
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!--Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+  />
+
+  <!-- Ripple Effect from cdn -->
+  <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+
+   <!--JQUERY CDN -->
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+   <!--hangul CDN -->
+  <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+
+   <!--fontawesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+     .keyboard-layout{
+      @apply [&>div]:flex [&>div]:items-center [&>div]:justify-center 
+      [&>div]:gap-2 [&>div]:my-2;
+     }
+
+      .keyboard-btn {
+      @apply [&>button]:bg-gray-900 [&>button]:border [&>button]:w-14 [&>button]:p-2 [&>button]:text-white [&>button]:rounded-md [&>button]:text-center [&>button]:text-2xl;
+      }
+
+          }
+
+  </style>
+  
+</head>
+
+<body class="md:h-screen h-auto flex justify-center items-center flex-col">
+  
+
+  <!-- 회원 가입 -->
+        <!-- Modal -->
+        <div class=" flex items-center justify-center z-50 regi-modal"  id = "register">
+            <div class="bg-white rounded-lg p-6 w-96 max-w-full shadow-lg transform transition-all duration-300">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                    <h2 class="text-xl font-semibold">인증번호 전송</h2>
+                  
+                </div>
+
+                <!-- Modal Content & info라는 클래스를 document.queryselectorAll로 불러와서 인덱스 지정하기 때문에 가상키보드로 타이핑 칠 수 있음-->
+                <div class="mt-6 space-y-4">
+                  <span>
+                    <input type="text" id="name" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2 info" placeholder="이름">
+                    <input type="text" id="phon" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2 info" placeholder="전화번호">
+                     <button id="send" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 block my-2 w-full">인증번호 전송</button>
+                  
+                  </span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+  <!-- 가상 키보드 시작-->
+
+    <!--keyboard-container 클래스명 수정. *240706에 z-index 제거함-->
+    <div class="justify-center items-center hidden md:flex px-3 rounded-lg py-2 mt-10 ">
+      <div class="hidden">
+        <textarea></textarea>
+      </div>
+     <div class="bg-black/90 p-3 rounded-lg flex items-center justify-center flex-col [&>div]:m-1 [&>div>button]:bg-gray-900 [&>div>button]:border [&>div>button]:text-white [&>div>button]:rounded-md [&>div>button]:text-center">
+
+       <!--요 바로 위에 있는 거는 맨 윗줄과 아랫줄만 통제함..-->
+
+       <div class="flex items-center justify-center gap-2 [&>button]:w-14 [&>button]:p-2 [&>button]:text-2xl">
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+        <button class="btn">4</button>
+        <button class="btn">5</button>
+        <button class="btn">6</button>
+        <button class="btn">7</button>
+        <button class="btn">8</button>
+        <button class="btn">9</button>
+        <button class="btn">0</button>
+
+     </div>
+
+
+        <div class="en-keyboard keyboard-layout">
+           <div class="keyboard-btn">
+            <button class="btn en-btn">q</button>
+            <button class="btn en-btn">w</button>
+            <button class="btn en-btn">e</button>
+            <button class="btn en-btn">r</button>
+            <button class="btn en-btn">t</button>
+            <button class="btn en-btn">y</button>
+            <button class="btn en-btn">u</button>
+            <button class="btn en-btn">i</button>
+            <button class="btn en-btn">o</button>
+            <button class="btn en-btn">p</button>
+          </div>
+
+          <div class="keyboard-btn">
+           <button class="btn en-btn">a</button>
+           <button class="btn en-btn">s</button>
+           <button class="btn en-btn">d</button>
+           <button class="btn en-btn">f</button>
+           <button class="btn en-btn">g</button>
+           <button class="btn en-btn">h</button>
+           <button class="btn en-btn">j</button>
+           <button class="btn en-btn">k</button>
+           <button class="btn en-btn">l</button>
+         </div>
+
+          <div class="keyboard-btn">
+           <button class="en-shift !w-20"><i class="fa-solid fa-arrow-up"></i></button>
+          <button class="btn en-btn">z</button>
+           <button class="btn en-btn">x</button>
+           <button class="btn en-btn">c</button>
+           <button class="btn en-btn">v</button>
+           <button class="btn en-btn">b</button>
+           <button class="btn en-btn">n</button>
+           <button class="btn en-btn">m</button>
+              <button class="delete p-1"><i class="fa-solid fa-arrow-right rotate-180"></i></button>
+         </div>
+       </div>
+
+
+
+        <div class="ko-keyboard keyboard-layout hidden ">
+          <div class="keyboard-btn">
+            <button class="btn fortis">ㅂ</button>
+              <button class="btn fortis">ㅈ</button>
+              <button class="btn fortis">ㄷ</button>
+              <button class="btn fortis">ㄱ</button>
+              <button class="btn fortis">ㅅ</button>
+
+            <button class="btn fortis hidden">ㅃ</button>
+              <button class="btn fortis hidden">ㅉ</button>
+              <button class="btn fortis hidden">ㄸ</button>
+              <button class="btn fortis hidden">ㄲ</button>
+              <button class="btn fortis hidden">ㅆ</button>
+              <button class="btn">ㅛ</button>
+              <button class="btn">ㅕ</button>
+              <button class="btn">ㅑ</button>
+              <button class="btn">ㅐ</button>
+              <button class="btn">ㅔ</button>
+          </div>
+
+           <div class="keyboard-btn">
+            <button class="btn">ㅁ</button>
+            <button class="btn">ㄴ</button>
+            <button class="btn">ㅇ</button>
+            <button class="btn">ㄹ</button>
+            <button class="btn">ㅎ</button>
+            <button class="btn">ㅗ</button>
+            <button class="btn">ㅓ</button>
+            <button class="btn">ㅏ</button>
+            <button class="btn">ㅣ</button>
+          </div>
+
+
+
+           <div class="keyboard-btn">
+                  <button class="ko-shift !w-20"><i class="fa-solid fa-arrow-up"></i></button>
+          <button class="btn">ㅋ</button>
+           <button class="btn">ㅌ</button>
+           <button class="btn">ㅊ</button>
+           <button class="btn">ㅍ</button>
+           <button class="btn">ㅠ</button>
+           <button class="btn">ㅜ</button>
+           <button class="btn">ㅡ</button>
+                  <button class="delete p-1"><i class="fa-solid fa-arrow-right rotate-180"></i></button>
+        </div>
+
+       </div>
+
+
+        <div class="[&>button]:text-2xl flex gap-4">
+         <button class="translate p-2">한/영</button>
+         <button class="space px-24 py-2">Space</button>
+       </div>
+        </div>
+
+
+
+    </div>
+
+   <!-- 가상 키보드 종료-->
+
+ 
+  <script src="js/home/certification.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+  
+</body>
+
+</html>

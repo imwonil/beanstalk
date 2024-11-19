@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 페이지</title>
+  <link rel="stylesheet" href="../css/style.css">
+    <!-- CDN 연결 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    
+    <!-- FontAwesome, Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Tailwind 및 Material CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+    
+    <!-- 스타일 정의 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .styled-th { @apply p-3 font-bold bg-gray-50 text-black border border-gray-300 hidden }
+            .styled-tr { @apply bg-white flex flex-row flex-wrap mb-10 }
+            .styled-td { @apply w-full p-3 text-gray-800 text-center border block relative }
+            .styled-designation { @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold }
+            @screen md {
+                .styled-th { @apply table-cell }
+                .styled-tr:hover { @apply bg-gray-100 }
+                .styled-tr { @apply table-row flex-row flex-nowrap }
+                .styled-td { @apply table-cell w-auto }
+                .styled-designation { @apply hidden }
+            }
+        }
+    </style>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+
+     <body>
+      
+       <!-- 결제 모달 -->
+       <div class="payment-modal flex justify-center items-center h-screen fixed w-full z-50 hidden">
+           <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+           <div class="flex items-center justify-center w-full md:w-1/3 z-50">
+               <div class="bg-white rounded-lg p-6 w-full shadow-lg transition-all duration-300">
+                   <!-- 모달 헤더 -->
+                   <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                       <h2 id="money" class="text-xl font-semibold">금액</h2>
+                   </div>
+                   <div class="mt-6 space-y-4">
+                       <div class="relative w-full">
+                           <button id="halboo" class="dropdown-button w-full p-2 px-4 mb-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm">
+                               할부 개월 수 선택
+                               <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-5 ml-2 -mr-1 absolute top-2 right-3" fill="currentColor">
+                                   <path d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" />
+                               </svg>
+                           </button>
+                           <div class="dropdown-menu absolute right-0 w-full rounded-md shadow-lg bg-white hidden z-20">
+                               <a class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100">01개월</a>
+                               <a class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100">02개월</a>
+                               <a class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100">03개월</a>
+                               <!-- 더 많은 개월 수 옵션 -->
+                           </div>
+                       </div>
+
+                       <div class="flex justify-end py-3">
+                           <button class="mt-3 w-full mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 md:ml-3 md:w-auto md:text-sm">
+                               <a href="javascript:reqVCAT_HTTP()">결제하기</a>
+                           </button>
+                           <button class="cancel-button mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 md:ml-3 md:w-auto md:text-sm">닫기</button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+
+
+
+          <!-- 상품 추가 모달 끝-->
+   
+            <div class="flex h-screen overflow-y-hidden bg-white" x-data="setup()" x-init="$refs.loading.classList.add('hidden')">
+              <!-- 로딩 스크린 -->
+              <div
+                x-ref="loading"
+                class="fixed inset-0 z-50 flex items-center justify-center text-white bg-black bg-opacity-50"
+                style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
+              >
+                Loading.....
+              </div>
+
+              <!-- 사이드바 백드랍 -->
+              <div
+                x-show.in.out.opacity="isSidebarOpen"
+                class="fixed inset-0 z-10 bg-black bg-opacity-20 lg:hidden"
+                style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
+              ></div>
+
+              <!-- 사이드바 -->
+              <aside
+                x-transition:enter="transition transform duration-300"
+                x-transition:enter-start="-translate-x-full opacity-30  ease-in"
+                x-transition:enter-end="translate-x-0 opacity-100 ease-out"
+                x-transition:leave="transition transform duration-300"
+                x-transition:leave-start="translate-x-0 opacity-100 ease-out"
+                x-transition:leave-end="-translate-x-full opacity-0 ease-in"
+                class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-white border-r shadow-lg lg:z-auto lg:static lg:shadow-none"
+                :class="{'-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen}"
+              >
+                <!-- 사이드바 헤더 -->
+                <div class="flex items-center justify-between flex-shrink-0 p-2" :class="{'lg:justify-center': !isSidebarOpen}">
+                  <span class="p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
+                    ACE      
+
+
+                    <span :class="{'lg:hidden': !isSidebarOpen}">STUDY</span>
+
+
+
+                  </span>
+
+                  <button @click="toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">
+                    <svg
+                      class="w-6 h-6 text-gray-600"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+
+                </div>
+                <!-- 사이드바 링크 -->
+                <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
+                  <ul class="p-2 overflow-hidden">
+                    <li>
+                      <a
+                        href="#"
+                        class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                        :class="{'justify-center': !isSidebarOpen}"
+                      >
+                        <span>
+                          <svg
+                            class="w-6 h-6 text-gray-400"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            />
+                          </svg>
+                        </span>
+                        <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
+                      </a>
+                    </li>
+                    <!-- 사이드바 링크 -->
+                  </ul>
+                </nav>
+                <!-- 사이드바 푸터 -->
+                <div class="flex-shrink-0 p-2 border-t max-h-14">
+                  <button
+                    class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring mr-0"
+                  >
+                    <span>
+                      <svg
+                        class="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                    </span>
+                    <span :class="{'lg:hidden': !isSidebarOpen}"> Logout </span>
+                  </button>
+                </div>
+              </aside>
+
+              <div class="flex flex-col flex-1 h-full overflow-hidden">
+                <!-- 네브바 -->
+                <header class="flex-shrink-0 border-b">
+                  <div class="flex items-center justify-between p-2">
+                    <!-- 좌측 네브바 -->
+                    <div class="flex items-center space-x-3">
+                      <span class="p-2 text-xl font-semibold tracking-wider uppercase lg:hidden">ACE</span>
+                      <!-- 토글 기능 있는 사이드바 버튼 -->
+                      <button @click="toggleSidbarMenu()" class="p-2 rounded-md focus:outline-none focus:ring">
+                        <svg
+                          class="w-4 h-4 text-gray-600"
+                          :class="{'transform transition-transform -rotate-180': isSidebarOpen}"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                        </svg>
+                      </button>
+
+                    </div>
+
+
+                    <h1 class="mr-10 text-xl font-bold">상품 선택</h1>
+                    <span></span>
+                  </div>
+                </header>
+                <!-- 메인 콘텐트 -->
+
+                <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll ">
+                  <!-- 메인 콘텐츠 헤더 -->
+
+                  <div class = "warning-modal justify-center flex items-center h-screen fixed w-full z-50 sm:top-1/4 hidden">
+                     <div class="fixed inset-0 bg-gray-300 bg-opacity-75 z-20">
+
+                     </div>
+
+                     <!-- 모달 -->
+
+                       <div class="sm:w-1/4 sm:h-screen flex items-end justify-center pt-4  px-4 pb-24 text-center sm:block sm:p-0 z-50">
+                         <!-- 모달 패널 -->
+                         <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                             <!-- 모달 컨텐츠 -->
+                             <div class="sm:flex sm:items-start">
+                               <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                 <!-- Heroicon name: outline/exclamation -->
+                                 <svg width="64px" height="64px" class="h-6 w-6 text-red-600" stroke="currentColor" fill="none" viewBox="0 0 24.00 24.00" xmlns="http://www.w3.org/2000/svg" stroke="#ef4444" stroke-width="0.45600000000000007">
+                                   <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V13C12.75 13.4142 12.4142 13.75 12 13.75C11.5858 13.75 11.25 13.4142 11.25 13V8C11.25 7.58579 11.5858 7.25 12 7.25Z" fill="#ef4444"></path>
+                                   <path d="M12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17Z" fill="#ef4444"></path>
+                                   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.2944 4.47643C9.36631 3.11493 10.5018 2.25 12 2.25C13.4981 2.25 14.6336 3.11493 15.7056 4.47643C16.7598 5.81544 17.8769 7.79622 19.3063 10.3305L19.7418 11.1027C20.9234 13.1976 21.8566 14.8523 22.3468 16.1804C22.8478 17.5376 22.9668 18.7699 22.209 19.8569C21.4736 20.9118 20.2466 21.3434 18.6991 21.5471C17.1576 21.75 15.0845 21.75 12.4248 21.75H11.5752C8.91552 21.75 6.84239 21.75 5.30082 21.5471C3.75331 21.3434 2.52637 20.9118 1.79099 19.8569C1.03318 18.7699 1.15218 17.5376 1.65314 16.1804C2.14334 14.8523 3.07658 13.1977 4.25818 11.1027L4.69361 10.3307C6.123 7.79629 7.24019 5.81547 8.2944 4.47643ZM9.47297 5.40432C8.49896 6.64148 7.43704 8.51988 5.96495 11.1299L5.60129 11.7747C4.37507 13.9488 3.50368 15.4986 3.06034 16.6998C2.6227 17.8855 2.68338 18.5141 3.02148 18.9991C3.38202 19.5163 4.05873 19.8706 5.49659 20.0599C6.92858 20.2484 8.9026 20.25 11.6363 20.25H12.3636C15.0974 20.25 17.0714 20.2484 18.5034 20.0599C19.9412 19.8706 20.6179 19.5163 20.9785 18.9991C21.3166 18.5141 21.3773 17.8855 20.9396 16.6998C20.4963 15.4986 19.6249 13.9488 18.3987 11.7747L18.035 11.1299C16.5629 8.51987 15.501 6.64148 14.527 5.40431C13.562 4.17865 12.8126 3.75 12 3.75C11.1874 3.75 10.4379 4.17865 9.47297 5.40432Z" fill="#ef4444"></path>
+                                 </svg>
+                               </div>
+                               <div class="mt-3 text-center sm:mt-0 sm:ml-6 sm:text-left">
+                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline"> 메세지 </h3>
+                                 <div class="mt-2">
+                                   <p class="warning-modal-text text-sm text-gray-500"> 인증번호가 일치하지 않습니다.</p>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+
+                         </div>
+                       </div>
+
+                   </div>
+
+
+
+                  <div class = "suc-modal justify-center flex items-center h-screen fixed w-full z-50 sm:top-1/4 hidden ">
+                     <div class="fixed inset-0 bg-gray-300 bg-opacity-75 z-20">
+
+                     </div>
+
+                     <!-- 모달 -->
+
+                       <div class="sm:w-1/4 sm:h-screen flex items-end justify-center pt-4  px-4 pb-24 text-center sm:block sm:p-0 z-50">
+                         <!-- 모달 패널 -->
+                         <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                             <!-- 모달 컨텐츠 -->
+                             <div class="sm:flex sm:items-start">
+                               <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10">
+
+                                 <i class="text-green-400 fa-2x fa-regular fa-circle-check"></i>
+                               </div>
+                               <div class="mt-3 text-center sm:mt-0 sm:ml-6 sm:text-left">
+                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline"> 메세지 </h3>
+                                 <div class="mt-2">
+                                   <p class="suc-modal-text text-sm text-gray-500"> 인증번호가 일치하지 않습니다.</p>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+
+                         </div>
+                       </div>
+
+                   </div>
+
+
+
+                  
+                  <div x-data="{ openTab: 1 }" class="p-4 md:w-3/5 w-full m-auto">
+                    <div class="max-w-2xl mx-auto ">
+
+                        <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
+                            <button x-on:click="openTab = 1" :class="{ 'bg-black text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 teb ">고정석</button>
+                            <button x-on:click="openTab = 2" :class="{ 'bg-black text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 teb">자유석</button>
+                          <button x-on:click="openTab = 3" :class="{ 'bg-black text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 teb">기간제</button>
+                        </div>
+                           <!--상품 구매 탭 시작 -->
+
+
+                      
+                        <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+                          <table class="product-table w-full">
+                              <thead>
+                                  <tr class="styled-tr">
+                                      <th class="styled-th">상품명</th>
+                                      <th class="styled-th">유형</th>
+                                      <th class="styled-th">가격</th>
+                                      <th class="styled-th">유효기한</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="fixedType"></tbody>
+                          </table>
+
+
+                          </div>
+                          <div x-show="openTab === 2" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="styled-tr">
+                                        <th class="styled-th">상품명</th>
+                                        <th class="styled-th">유형</th>
+                                        <th class="styled-th">가격</th>
+                                        <th class="styled-th">유효기한</th>
+                                    </tr>
+                                </thead>
+                               <tbody id="feeType">
+                            </table>
+                          </div>
+
+                          <div x-show="openTab === 3" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="styled-tr">
+                                        <th class="styled-th">상품명</th>
+                                        <th class="styled-th">유형</th>
+                                        <th class="styled-th">가격</th>
+                                        <th class="styled-th">유효기한</th>
+                                    </tr>
+                                </thead>
+                              <tbody id="daysType">
+                            </table>
+                          </div>
+
+
+                    </div>
+                  </div>
+
+               
+
+                </main>
+
+       <!-- 메인 푸터 -->
+       <footer class="flex items-center justify-between flex-shrink-0 p-4 border-t max-h-14">
+         <div>BEANSTALK &copy; 2024</div>
+       </footer>
+
+              
+              </div>
+
+
+            </div>
+            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+
+        </div>
+
+
+
+       <script>
+         const setup = () => {
+           return {
+             loading: true,
+             isSidebarOpen: false,
+             toggleSidbarMenu() {
+               this.isSidebarOpen = !this.isSidebarOpen
+             },
+             isSettingsPanelOpen: false,
+             isSearchBoxOpen: false,
+           }
+         }
+       </script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+       <script src="../js/productList.js"></script>
+
+      </body>
+</html>

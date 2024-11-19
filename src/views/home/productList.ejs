@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+  <meta charset="utf-8">
+ 
+    
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta http-equiv="content-type" content="text/html; charset=euc-kr">
+ 
+	<!-- <html lang="ko"> -->
+
+
+
+
+
+<head>     
+
+
+  <title>replit</title>
+
+  <!--- Tailwind CSS CDN 연결 --->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--tailwind CSS CDN-->
+  <link rel="stylesheet" href="css/home/style.css">
+  <!--tailwind config.js-->
+
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+  <!-- <script src="/js/home/adminViews.js" defer></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" ></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
+  />
+
+  <!-- Ripple Effect from cdn -->
+  <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+
+    <!--Remix icon cdn -->
+  <link href="
+  https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css
+  " rel="stylesheet">
+
+
+   <!--JQUERY CDN -->
+   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+   <!--hangul CDN -->
+  <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+
+   <!--fontawesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  
+<style type="text/tailwindcss">
+  @layer utilities {
+    .styled-th{
+    @apply p-3 font-bold  bg-gray-50 text-black border border-gray-300 hidden
+    }
+  .styled-tr{
+        @apply bg-white flex flex-row flex-wrap mb-10;
+        }
+
+  .styled-td{
+      @apply w-full p-3 text-gray-800 text-center border border-b block relative;
+        }
+
+    .styled-designation{
+      @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold;
+    }
+
+    @screen md{
+    .styled-th{
+    @apply table-cell;
+    }
+
+    .styled-tr:hover{
+    @apply bg-gray-100;
+    }
+
+    .styled-tr{
+    @apply table-row flex-row flex-nowrap;
+    } 
+
+    .styled-td{
+    @apply table-cell w-auto;
+    } 
+
+    .styled-designation{
+    @apply hidden
+    }
+
+        }
+  }
+</style>
+  
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+
+  <!-- 추가 -->
+
+ 
+
+  <body>
+
+    <!-- 결제 모달 시작-->
+
+    <div class="payment-modal justify-center flex items-center h-screen fixed w-full z-50 hidden "> 
+
+      <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+   
+     <div class="flex items-center justify-center w-full md:w-1/3 z-50">        <div class="bg-white rounded-lg p-6 w-full shadow-lg transform transition-all duration-300 ">
+             <!-- 모달 헤더 -->
+             <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+                 <h2 id="money"class="text-xl font-semibold">금액</h2>
+
+             </div>
+             <div class="mt-6 space-y-4">
+
+               <div class="w-full my-5">
+                     <div class="relative w-full">
+                      <script type="text/javascript" src="/js/home/jquery-1.9.1.min.js" ></script>
+                      
+
+  
+                     <button id="halboo"   class="dropdown-button w-full p-2 px-4 mb-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
+                        할부 개월 수 선택
+                         <svg xmlns="http://www.w3.org/2000/svg"  class="w-[20px] h-5 ml-2 -mr-1 absolute top-2 right-3" viewBox="0 0 20 20" fill="currentColor">
+                             <path fill-rul e="evenodd" d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                         </svg>
+                     </button>
+
+                         <!-- 할부 개월 수 선택 -->
+                         <div class="dropdown-menu absolute right-0 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-20">
+                                   <a   class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "01" role="menuitem">01개월</a>
+                                   <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "02" role="menuitem">02개월</a>
+
+                                 <a   class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content"  value = "03" role="menuitem">03개월</a>
+                                  <a   class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "04" role="menuitem">04개월</a>
+                                  <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content"  value = "05" role="menuitem">05개월</a>
+
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "06" role="menuitem">06개월</a>
+
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">07개월</a>
+
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">08개월</a>
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">09개월</a>
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">10개월</a>
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">12개월</a>
+                                 <a  class="block px-4 py-2 mb-1 text-sm text-gray-700 rounded-md bg-white hover:bg-gray-100 dropdown-content" value = "07" role="menuitem">12개월</a>
+                                
+                         
+               </div>
+                           </div>
+
+
+                         <div class="mx-auto ">
+
+                              <!--결제하기/닫기 버튼 시작, 적용 버튼 누르면 서버로 변경 사항이 전달되어야 한다. 취소 버튼을 누르면 배치도로 돌아가야 한다.-->
+                           <div class=" py-3 flex justify-end">
+                           <button class=" mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 md:ml-3 md:w-auto md:text-sm"> <a href="javascript:reqVCAT_HTTP()">결제하기</a> </button>                 
+                          
+                              <button class="cancel-button mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 md:ml-3 md:w-auto md:text-sm"> 닫기 </button>                 
+                             <!--결제하기/닫기 버튼 종료 -->
+
+                           </div>
+                       </div>
+        </from>
+
+
+                         </div>
+
+                 </div>
+
+
+             </div>
+         </div>
+     </div>
+
+     </div>
+
+
+  
+    <div>
+        <div class="flex h-screen overflow-y-hidden bg-white" x-data="setup()" x-init="$refs.loading.classList.add('hidden')">
+          <!-- 로딩 스크린 -->
+          <div
+            x-ref="loading"
+            class="fixed inset-0 z-50 flex items-center justify-center text-white bg-black bg-opacity-50"
+            style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
+          >
+            Loading.....
+          </div>
+
+          <!-- 사이드바 백드랍 -->
+          <div
+            x-show.in.out.opacity="isSidebarOpen"
+            class="fixed inset-0 z-10 bg-black bg-opacity-20 lg:hidden"
+            style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"
+          ></div>
+
+          <!-- 사이드바 -->
+          <aside
+            x-transition:enter="transition transform duration-300"
+            x-transition:enter-start="-translate-x-full opacity-30  ease-in"
+            x-transition:enter-end="translate-x-0 opacity-100 ease-out"
+            x-transition:leave="transition transform duration-300"
+            x-transition:leave-start="translate-x-0 opacity-100 ease-out"
+            x-transition:leave-end="-translate-x-full opacity-0 ease-in"
+            class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-white border-r shadow-lg lg:z-auto lg:static lg:shadow-none"
+            :class="{'-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen}"
+          >
+            <!-- 사이드바 헤더 -->
+            <div class="flex items-center justify-between flex-shrink-0 p-2" :class="{'lg:justify-center': !isSidebarOpen}">
+              <span class="p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
+                ACE      
+
+
+                <span :class="{'lg:hidden': !isSidebarOpen}">STUDY</span>
+
+
+
+              </span>
+
+              <button @click="toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">
+                <svg
+                  class="w-6 h-6 text-gray-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+            </div>
+            <!-- 사이드바 링크 -->
+            <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
+              <ul class="p-2 overflow-hidden">
+                <li>
+                  <a
+                    href="#"
+                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    :class="{'justify-center': !isSidebarOpen}"
+                  >
+                    <span>
+                      <svg
+                        class="w-6 h-6 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        />
+                      </svg>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
+                  </a>
+                </li>
+                <!-- 사이드바 링크 -->
+              </ul>
+            </nav>
+            <!-- 사이드바 푸터 -->
+            <div class="flex-shrink-0 p-2 border-t max-h-14">
+              <button
+                class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring mr-0"
+              >
+                <span>
+                  <svg
+                    class="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
+                </span>
+                <span :class="{'lg:hidden': !isSidebarOpen}"> Logout </span>
+              </button>
+            </div>
+          </aside>
+
+          <div class="flex flex-col flex-1 h-full overflow-hidden">
+            <!-- 네브바 -->
+            <header class="flex-shrink-0 border-b">
+              <div class="flex items-center justify-between p-2">
+                <!-- 좌측 네브바 -->
+                <div class="flex items-center space-x-3">
+                  <span class="p-2 text-xl font-semibold tracking-wider uppercase lg:hidden">ACE</span>
+                  <!-- 토글 기능 있는 사이드바 버튼 -->
+                  <button @click="toggleSidbarMenu()" class="p-2 rounded-md focus:outline-none focus:ring">
+                    <svg
+                      class="w-4 h-4 text-gray-600"
+                      :class="{'transform transition-transform -rotate-180': isSidebarOpen}"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                    </svg>
+                  </button>
+
+                </div>
+
+
+              </div>
+              
+            </header>
+            <!-- 메인 콘텐트 -->
+
+            
+            <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll ">
+              <!-- 메인 콘텐츠 헤더 -->
+
+
+              <div x-data="{ openTab: 1 }" class="p-4 md:w-3/5 w-full m-auto">
+
+                
+                <div class="max-w-2xl mx-auto ">
+                   <div class="flex justify-center mt-3 p-2 text-lg font-bold shadow-lg border-t rounded-t-lg">상품 선택</div>
+                    <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
+                        <button x-on:click="openTab = 1" :class="{ 'bg-black text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300z teb " >고정석</button>
+                        <button x-on:click="openTab = 2" :class="{ 'bg-black text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 teb " >자유석</button>
+                      <button x-on:click="openTab = 3" :class="{ 'bg-black text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 teb"  >기간제</button>
+                    </div>
+                      
+
+                 
+
+                   <!--상품 구매 탭 시작 -->
+                    <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+
+
+                       <!--상품 목록 수정 테이블 시작 -->
+                      <table class="product-table border-collapse w-full rounded-md">
+                          <thead>
+                              <tr class="styled-tr">
+                                  
+                                  <th class="styled-th">상품명</th>
+                                  <th class="styled-th">유형</th>
+                                  <th class="styled-th">가격</th>
+                                <th class="styled-th">유효기한</th>
+                                 
+                              </tr>
+                          </thead>
+
+
+          
+
+                          <tbody id="fixedType">
+                  
+                        </tbody>
+                      </table>
+                       <!--상품 목록 수정 테이블 종료 -->
+
+                      </div>
+
+
+
+                        <!--상품 구매 탭 종료 및 문열기 탭 시작-->
+                    <div x-cloak x-show="openTab === 2" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+                      <!--상품 목록 수정 테이블 시작 -->
+                      <table class="border-collapse w-full rounded-md">
+                          <thead>
+                              <tr>
+
+                                  <th class="styled-th">상품명</th>
+                                  <th class="styled-th">유형</th>
+                                  <th class="styled-th">가격</th>
+                                <th class="styled-th">유효기한</th>
+                                 
+                              </tr>
+                          </thead>
+
+
+
+
+                          <tbody id="feeType">
+                        
+                        </tbody>
+                      </table>
+                       <!--상품 목록 수정 테이블 종료 -->
+                    </div>
+
+                      <!--문열기 탭 종료 및 퇴실 탭 시작-->
+
+                    <div x-cloak x-show="openTab === 3" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-black">
+                      <!--상품 목록 수정 테이블 시작 -->
+                      <table class="border-collapse w-full rounded-md">
+                          <thead>
+                              <tr>
+
+                                <th class="styled-th">상품명</th>
+                                <th class="styled-th">유형</th>
+                                <th class="styled-th">가격</th>
+                               <th class="styled-th">유효기한</th>
+                               
+                              </tr>
+                          </thead>
+                          <tbody id="daysType">
+                        
+                        </tbody>
+                      </table>
+                       <!--상품 목록 수정 테이블 종료 -->
+                    </div>
+
+                       <!--퇴실 탭 종료-->
+             
+
+
+
+            
+
+                       
+
+            <!-- 메인 푸터 -->
+            <footer class="flex items-center justify-between flex-shrink-0 p-4 border-t max-h-14">
+              <div>BEANSTALK &copy; 2024</div>
+            </footer>
+          </div>
+
+
+   
+   
+   
+     <div class = "suc-modal judyigy flex items-center h-screen fixed w-full z-50 sm:top-1/4 hidden">
+        <div class="fixed inset-0 bg-gray-300 bg-opacity-75 z-20">
+   
+        </div>
+   
+        <!-- 모달 -->
+   
+          <div class="sm:w-1/4 sm:h-screen flex items-end judyigy pt-4  px-4 pb-24 text-center sm:block sm:p-0 z-50">
+            <!-- 모달 패널 -->
+            <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <!-- 모달 컨텐츠 -->
+                <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex-shrink-0 flex items-center judyigy h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10">
+   
+                    <i class="text-green-400 fa-2x fa-regular fa-circle-check"></i>
+                  </div>
+                  <div class="mt-3 text-center sm:mt-0 sm:ml-6 sm:text-left">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" > 메세지 </h3>
+                    <div class="mt-2">
+                      <p class="suc-modal-text text-sm text-gray-500"> 인증번호가 일치하지 않습니다.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+   
+            </div>
+          </div>
+   
+      </div>
+
+        </head>
+
+  <script src="js/home/productList.js"></script>
+ 
+  <form name="form" method="post">
+  <table align="center" cellspacing="0" cellpadding="0" >
+    <tr bgcolor="blue" align ="center">	</tr>
+    <td style="display:none" ><input type="radio" name="myRadios" onclick="handleClick();" value="credit_cancel"/>신용취소</td>
+  
+    <tr align="left" style="display:none" >
+      <td >할부 : <input type="text" name="halbu" value="00"></td>
+        <!-- 아래부분 결재 금액  -->
+      <td type="text" id = "Money"name="money" > 상품 구매 </td>  
+    </tr>
+    
+  
+  <!-- SendDdata : 결제해 해당  데이타 보냄 RecvData 보낸 데이타정보를 받아옴 -->
+  <input style="display:none" type="text" name="SendData" size="100">
+  <textarea style="display:none" name="RecvData" cols="100" rows="5">
+
+  </form>
+
+  <link rel="stylesheet" href="/css/home/Kioce.css">
+  <script type="text/javascript" src="/js/home/jquery-1.9.1.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> 
+  </body>
+  
+  
+  </html>
+
+
+  
+
+
+<!-- 저장 -->

@@ -1,0 +1,18 @@
+[
+    {
+        "sendName": "fixedDeadine",
+        "Text": "이용해주셔서 감사합니다.~",
+        "send": "YES",
+        "set": "1",
+        "daySend": "33",
+        "timeSend": 60
+    },
+    {
+        "sendName": "feeDeadine",
+        "Text": "ㅇㄴㄹㅇㄴㄹ",
+        "send": "YES",
+        "set": "1",
+        "daySend": "",
+        "timeSend": 15900
+    }
+]
