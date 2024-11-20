@@ -53,10 +53,10 @@ const output = {
       res.render("home/certification")
    },
    productlist: (req, res) => {
-      res.render("home/productlist")
+      res.render("home/productList")
    },
    adminProductlist: (req, res) => {
-      res.render("home/adminProductlist")
+      res.render("home/adminProductList")
    },
 
 
