@@ -29,15 +29,4 @@ const Delete= require("./src/routers/home/delete")
 app.use("/", home);
 
 
-
-// app.listen(3000, (req, res) =>{
-     
-// })
-
-
-
-
-
-
-
  module.exports = app;
