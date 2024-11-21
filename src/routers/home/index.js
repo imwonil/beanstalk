@@ -113,6 +113,10 @@ router.get("/productlist", ctrl.output.productlist)
 router.get("/adminSetproduct", ctrl.output.adminSetproduct)
 router.get("/calender", ctrl.output.calender)
 router.get("/adminMessage", ctrl.output.adminMessage)
+
+router.get("/admin", ctrl.output.admin)
+
+
 ////////////poset/////////////////
 
 router.post("/login", ctrl.process.login)
@@ -135,5 +139,8 @@ router.post("/forcibley", ctrl.process.forcibley)
 router.post("/calender", ctrl.process.calender)
 router.post("/changeSeat", ctrl.process.changeSeat)
 router.post("/adminMessage", ctrl.process.adminMessage)
+
+
+// router.post("/admin", ctrl.process.admin)
 
  module.exports = router      

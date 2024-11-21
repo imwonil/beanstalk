@@ -64,6 +64,9 @@ const output = {
       res.render("home/adminMessage")
    },
 
+   admin: (req, res) => {
+      res.render("home/admin")
+   },
   
 
 };
