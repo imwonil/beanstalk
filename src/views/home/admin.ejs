@@ -12,8 +12,26 @@
   <!--fontawesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+
   
 </head>
+
+   <style type="text/tailwindcss">
+      @layer utilities {
+        .styled-td{
+       @apply p-4 whitespace-nowrap text-sm font-normal text-gray-900;
+        }
+      
+
+
+            }
+
+
+      </style>
+
+   
 <body>
 
   <!-- This is an example component -->
@@ -260,12 +278,18 @@
                           <div class="overflow-x-auto rounded-lg">
                              <div class="align-middle inline-block min-w-full">
                                 <div class="shadow overflow-hidden sm:rounded-lg">
-                                   <table class="min-w-full divide-y divide-gray-200">
+                                   <table class="history-table min-w-full divide-y divide-gray-200">
                                       <thead class="bg-gray-50">
                                          <tr>
                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                               결제명
+                                               좌석유형
                                             </th>
+
+                                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                 회원명
+                                              </th>
+
+                                            
                                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                날짜 및 시간
                                             </th>
@@ -275,83 +299,7 @@
                                          </tr>
                                       </thead>
                                       <tbody class="bg-white">
-                                         <tr>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                               고정석-30days <span class="font-semibold">이예지</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                               20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                               120,000
-                                            </td>
-                                         </tr>
-                                         <tr class="bg-gray-50">
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                               고정석-30days <span class="font-semibold">이석훈</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                               20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                               120,000
-                                            </td>
-                                         </tr>
-                                         <tr>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                               고정석-30days <span class="font-semibold">김민영</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                               20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                120,000
-                                            </td>
-                                         </tr>
-                                         <tr class="bg-gray-50">
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                               고정석-30days <span class="font-semibold">김한나</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                 20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                 120,000
-                                            </td>
-                                         </tr>
-                                         <tr>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                               고정석-30days <span class="font-semibold">조예은</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                                20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                               120,000
-                                            </td>
-                                         </tr>
-                                         <tr class="bg-gray-50">
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900 rounded-lg rounded-left">
-                                               고정석-30days <span class="font-semibold">조예원</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                               20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                120,000
-                                            </td>
-                                         </tr>
-                                         <tr>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                               고정석-30days <span class="font-semibold">오은재</span>
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                               20240611
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                                120,000
-                                            </td>
-                                         </tr>
+                                       
                                       </tbody>
                                    </table>
                                 </div>

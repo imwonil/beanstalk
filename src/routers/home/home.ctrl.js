@@ -70,8 +70,8 @@ const output = {
    allUserInfo: (req, res) => {
       res.render("home/allUserInfo")
    },
-   detailUserInfo: (req, res) => {
-      res.render("home/detailUserInfo")
+   detailedUserInfo: (req, res) => {
+      res.render("home/detailedUserInfo")
    },
 
    

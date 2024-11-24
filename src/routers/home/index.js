@@ -26,6 +26,7 @@ router.get('/adminGoodsKiosk', (req,res) =>{
 
 }).catch((err) => console.error(err));
 
+
 fs.readFile("./src/database/users.json")
 .then((data) => {
   const a = JSON.parse(data);
@@ -118,10 +119,7 @@ router.get("/admin", ctrl.output.admin)
 
 
 router.get("/allUserInfo", ctrl.output.allUserInfo)
-
-
-
-router.get("/detailUserInfo", ctrl.output.detailUserInfo)
+router.get("/detailedUserInfo", ctrl.output.detailedUserInfo)
 
 
 ////////////poset/////////////////
