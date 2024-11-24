@@ -117,6 +117,13 @@ router.get("/adminMessage", ctrl.output.adminMessage)
 router.get("/admin", ctrl.output.admin)
 
 
+router.get("/allUserInfo", ctrl.output.allUserInfo)
+
+
+
+router.get("/detailUserInfo", ctrl.output.detailUserInfo)
+
+
 ////////////poset/////////////////
 
 router.post("/login", ctrl.process.login)

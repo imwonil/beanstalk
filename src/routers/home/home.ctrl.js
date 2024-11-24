@@ -67,8 +67,14 @@ const output = {
    admin: (req, res) => {
       res.render("home/admin")
    },
-  
+   allUserInfo: (req, res) => {
+      res.render("home/allUserInfo")
+   },
+   detailUserInfo: (req, res) => {
+      res.render("home/detailUserInfo")
+   },
 
+   
 };
 
 
