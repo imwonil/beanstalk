@@ -56,7 +56,7 @@ const output = {
       res.render("home/productList")
    },
    adminProductlist: (req, res) => {
-      res.render("home/adminProductList")
+      res.render("home/adminProductlist")
    },
 
 
@@ -72,6 +72,9 @@ const output = {
    },
    detailedUserInfo: (req, res) => {
       res.render("home/detailedUserInfo")
+   },
+   userGoodsKinds: (req, res) => {
+      res.render("home/userGoodsKinds")
    },
 
    

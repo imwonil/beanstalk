@@ -24,13 +24,16 @@ const TEB = document.querySelectorAll('.teb');
 const SAVE = document.getElementById("save")
 const TYPE = document.getElementById("seetType")
 const resaveName = document.getElementById("resaveName")
+
+const tebKinde = "고정석"
+
+tebClick(tebKinde);
+
+
 TEB.forEach((tebKinde) => {
-
  tebKinde.onclick = () => {tebClick(tebKinde.innerText)};
-
-
-
 })
+
 
 
 
@@ -46,6 +49,8 @@ function tebClick(tebKinde) {
            for(var y = 0; y<menz[0].feeName.length; y++) {
           
             const tr =  document.createElement('tr')
+                tr.className = "styled-tr"
+               
             const tbody = document.querySelector('tbody')
             
             tbody.appendChild(tr)
@@ -64,17 +69,14 @@ function tebClick(tebKinde) {
             td2.className = "styled-td"
             td3.className =  "styled-td"
             td4.className =  "styled-td"
-         
-            
-          
-           
-            td0.innerText = "고정석"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
+
+               
+               td0.innerHTML = "고정석<span class='styled-span'>상품명</span>"
+            td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+            td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+            td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
           
             
-           
             tr.appendChild(td0).id = [y]
             tr.appendChild(td1).id = menz[0].feeName[y] 
             tr.appendChild(td2).id =  menz[0].fee[y]  
@@ -132,15 +134,12 @@ function tebClick(tebKinde) {
             td3.className =  "styled-td"
             td4.className =  "styled-td"
          
-            
-          
-           
-            td0.innerText = "자유석"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
-          
-            
+
+            td0.innerHTML = "자유석<span class='styled-span'>상품명</span>"
+            td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+            td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+            td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
+
            
             tr.appendChild(td0).id = [y]
             tr.appendChild(td1).id = menz[0].feeName[y] 
@@ -199,14 +198,10 @@ function tebClick(tebKinde) {
             td3.className =  "styled-td"
             td4.className =  "styled-td"
          
-            
-          
-           
-            td0.innerText = "기간제"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
-          
+            td0.innerHTML = "기간제<span class='styled-span'>상품명</span>"
+            td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+            td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+            td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
             
            
             tr.appendChild(td0).id = [y]
@@ -239,13 +234,8 @@ function tebClick(tebKinde) {
              document.getElementById(`daysResave${[y]}`).onclick = () => {resave(cdId,feeName.id,fee.id,expiry.id, index.id, "daysType")};
              document.getElementById( `daysDelet${[y]}`).onclick = () => {delet(cdId, index.id, "daysType")};  
             }  
-        
-        
         }
-      
-      
-      
- 
+
 }
   
       }))  
@@ -253,9 +243,7 @@ function tebClick(tebKinde) {
      }
 
 
-
 const dropdownContent = document.querySelectorAll('.dropdown-content')
-
 let isDropdownOpen = true;
 let idx = 0;
 
@@ -265,7 +253,6 @@ const dropdownMenu = [...dropdownMenus]
 
 
 //boolean 값을 toggle 해서 dropdownMenu의 open/close를 결정한다. 
-
 
 function toggleDropdown() {
     
@@ -279,19 +266,14 @@ function toggleDropdown() {
 
 toggleDropdown();
 
-
 // 추가시 상품 설정 
 dropdownButton.forEach((btn)=>{
     
     btn.addEventListener("click", ()=>{
-    
         idx = dropdownButton.indexOf(btn)
-      
         toggleDropdown();
     }) 
 })
-
-
 
 
 //옵션의 각 요소를 선택하였을 때 옵션의 대가리를 내가 선택한 요소의 텍스트 콘텐츠로 결정한다.

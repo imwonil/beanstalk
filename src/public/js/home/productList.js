@@ -42,18 +42,13 @@ const TYPE = document.getElementById("seetType")
 
 
 TEB.forEach((tebKinde) => {
-
    tebClick(tebKinde.innerText)
    tebKinde = tebKinde.innerText
-
-
-
 })
 
 
 
 function tebClick(tebKinde) {
-
     fetch('/adminGoodsKiosk')
 .then(res => res.json())
 .then((data => { 
@@ -69,13 +64,10 @@ function tebClick(tebKinde) {
             tbody.appendChild(tr)
 
               tr.className = "styled-tr"
-
             const td0 = document.createElement('td')
             const td1 = document.createElement('td')
             const td2 = document.createElement('td')
             const td3 = document.createElement('td')
-
-
 
 
             td0.className = "styled-td"
@@ -84,16 +76,12 @@ function tebClick(tebKinde) {
             td3.className =  "styled-td"
 
 
+             td0.innerHTML = "고정석<span class='styled-span'>상품명</span>"
+             td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+             td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+             td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
 
-
-
-            td0.innerText = "고정석"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
-
-
-
+             
             tr.appendChild(td0).id = "fixedType"
             tr.appendChild(td1).id = menz[0].feeName[y] 
             tr.appendChild(td2).id =  menz[0].fee[y]+"fixedType"  
@@ -119,7 +107,6 @@ function tebClick(tebKinde) {
             const td1 = document.createElement('td')
             const td2 = document.createElement('td')
             const td3 = document.createElement('td')
-            const td4 = document.createElement('td')
 
 
 
@@ -129,16 +116,13 @@ function tebClick(tebKinde) {
             td3.className =  "styled-td"
 
 
+          td0.innerHTML = "자유석<span class='styled-span'>상품명</span>"
+          td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+          td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+          td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
 
 
-
-            td0.innerText = "자유석"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
-
-
-
+          
             tr.appendChild(td0).id = "feeType"
             tr.appendChild(td1).id = menz[0].feeName[y] 
             tr.appendChild(td2).id =  menz[0].fee[y]+"feeType"  
@@ -173,21 +157,16 @@ function tebClick(tebKinde) {
 
 
 
-
-
-            td0.innerText = "기간제"
-            td1.innerText = menz[0].feeName[y] 
-            td2.innerText = menz[0].fee[y]  
-            td3.innerText =  menz[0].expiry[y]
-
+          td0.innerHTML = "기간제<span class='styled-span'>상품명</span>"
+          td1.innerHTML = `${menz[0].feeName[y] }<span class='styled-span'>유형</span>`
+          td2.innerHTML = `${menz[0].fee[y] }<span class='styled-span'>가격</span>`
+          td3.innerHTML = `${menz[0].expiry[y]}<span class='styled-span'>유효 기한</span>`
 
 
             tr.appendChild(td0).id = "daysType"
             tr.appendChild(td1).id = menz[0].feeName[y] 
             tr.appendChild(td2).id =  menz[0].fee[y]+"daysType"  
             tr.appendChild(td3).id = menz[0].expiry[y]
-
-
 
 
 
@@ -397,7 +376,7 @@ const number = parseInt(result);
       sendMsg = form.SendData.value;   
 
       if(sendMsg.length == 1) {
-   
+
 
         // warningModal.classList.toggle("hidden")
         // warningModalText.innerHTML = "할부 개월 수 및 금액을 확인 해주세요"
@@ -436,7 +415,7 @@ const number = parseInt(result);
         {      
           console.log("err")
           //요청 시 중복방지로직을 필수로 처리해주세요. 
-          
+
           if(iFlag == '0')
           {
 
@@ -469,7 +448,7 @@ const number = parseInt(result);
             const trimStr = arr[16].split(' ').join('');
             console.log(trimStr,"438")
            if(trimStr === "거래거절할부개월오류" ) {
-             
+
                                           // warningModalText.innerHTML = `${trimStr}`
                                           //  warningModal.classList.toggle("hidden")
 
@@ -477,10 +456,10 @@ const number = parseInt(result);
                                            justify.classList.toggle("hidden")
                                            modalMasg.innerHTML =`${trimStr}`
                                           setTimeout(() => {
-                                           
+
                                              location.href = "/productList"
                                           }, 900);
-                                             
+
                                           }   
 
                 const regex = /[^0-9]/g;
@@ -517,7 +496,7 @@ const number = parseInt(result);
               .then((res => res.json()))
               .then(( res) => {
                 console.log(res)
-       
+
 
                 // sucModalText.innerHTML = "결제 되었습니다."
                 //  sucModal.classList.toggle("hidden")
@@ -543,34 +522,34 @@ const number = parseInt(result);
                   //응답 받지 않아서 예외 처리
                 }
                 else{  
-                
+
 
                   justify.classList.toggle("hidden")
                   modalMasg.innerHTML = 'AJAX 통신 실패! NVCAT 실행 여부 확인!'
-                    
+
                   setTimeout(() => {
-                   
+
                     justify.classList.toggle("hidden")
-                   
+
                   }, 900);
 
                 iFlag = '0';
                }
               }
             });   
-               
+
           }
           else  {   
             justify.classList.toggle("hidden")
           modalMasg.innerHTML = '요금 중복 되였습니다.'
           setTimeout(() => {
-                   
+
             justify.classList.toggle("hidden")
-           
+
           }, 900);
           } 
-          
-          
+
+
         }
       }         
 

@@ -430,3 +430,17 @@ function makeTable(arr){
 
 }
 
+const detailedPageMoveBtn = document.querySelector(".detailed-page-move-btn")
+
+detailedPageMoveBtn.addEventListener("click", ()=>{
+  const phoneNumber = userPhoneNumber.innerHTML
+  console.log(phoneNumber)
+  moveDetailedPage();
+})
+
+function moveDetailedPage(){
+  
+  const phoneNumber = userPhoneNumber.innerText
+  
+  location.href = `/detailedUserInfo?phoneNumber=${phoneNumber}`
+}

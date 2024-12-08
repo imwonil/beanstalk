@@ -1,31 +1,20 @@
 "use strict"
 
-
-
 //240711 업데이트 입실 로직
-
 //checkin이 로그인 버튼 눌렀을 때 나타나는 입실 관련 모달창
-
 // fetch('http://3.38.152.166:3000/adminGoodsKiosk')
 // .then(res => res.json())
 // .then(data => { 
 // console.log(data,"data")
-
 // })
 
-
-
 const warningModal = document.querySelector(".warning-modal")
-
 const warningModalText = document.querySelector(".warning-modal-text")
 
   const sucModal = document.querySelector(".suc-modal")
-
   const sucModalText = document.querySelector(".suc-modal-text")
 
- 
   const  changeModal = document.querySelector(".change-modal")
-
 
 const checkin = document.querySelector(".checkin-modal")
 const checkinExit = document.querySelector(".checkin-exit")
@@ -38,17 +27,14 @@ const keyboardContainer = document.querySelector(".keyboard-container")
 const checkout = document.querySelector(".checkout-modal")
 const checkoutExit = document.querySelector(".checkout-exit")
 
-
 const loginSection = document.querySelector(".login-section")
 const findAnchor = document.querySelectorAll(".find-anchor")
 // const regiModal = document.querySelector(".regi-modal")
 const findModal = document.querySelector(".find-modal")
-
 const feather = document.querySelector(".feather")
 const findExit = document.querySelector(".find-exit")
 
 /**아이디/비번 찾기랑 회원가입 모달 각각 끄는 방법 */
-
 
 changeModal.classList.toggle("hidden")
 /**X 눌렀을 때 아이디/비밀번호 찾기 및 퇴실 창 제거 */
@@ -57,8 +43,6 @@ findExit.addEventListener("click", ()=>{
    findModal.classList.toggle("hidden")
 
 })
-
-
 
 
 const id = document.querySelectorAll(".id")
@@ -79,10 +63,6 @@ const footer = document.querySelector(".footer")
  const PHONE = document.querySelector("#PHONE"),  // 로그인 value id 값 html. 123 line
        PSWORD = document.querySelector("#PSWORD"), // 로그인 value id 값 html 126 line 
        BUTTON = document.querySelector("#BUTTON")
-
-
-
-
 
 
 // 아이디/비번찾기 모달 생성

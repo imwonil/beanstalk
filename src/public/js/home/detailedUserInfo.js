@@ -47,3 +47,9 @@ valChangeBtn.forEach((ele)=>{
 valModalCancel.addEventListener("click", ()=>{
   valChangeModal.classList.toggle("hidden")
 })
+
+const urlParams = new URL(location.href).searchParams;
+
+const phoneNumber = urlParams.get('phoneNumber');
+
+console.log(phoneNumber)

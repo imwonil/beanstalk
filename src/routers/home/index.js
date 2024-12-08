@@ -5,9 +5,6 @@ const fs =  require('fs').promises
 const path = require('path')
 
 
-
-
-
 // const ADminGoodsKiosk = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/adminUser/adminGoodsKiosk.json") 
 // const UserGoodsKinds = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/database/userGoodsKinds.json") 
 // const AdminNext = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/adminSetKinds/adminNext.json") 
@@ -17,7 +14,6 @@ fs.readFile("./src/adminUser/adminGoodsKiosk.json")
 .then((data) => {
 
 const datas = JSON.parse(data)
-
 
 
 router.get('/adminGoodsKiosk', (req,res) =>{
@@ -35,7 +31,6 @@ fs.readFile("./src/database/users.json")
     res.sendfile("./src/database/users.json");
   });
 })
-
 
 fs.readFile("./src/database/paymentHistory.json")
 .then((data) => {
@@ -120,6 +115,9 @@ router.get("/admin", ctrl.output.admin)
 
 router.get("/allUserInfo", ctrl.output.allUserInfo)
 router.get("/detailedUserInfo", ctrl.output.detailedUserInfo)
+
+
+router.get("/userGoodsKinds", ctrl.output.userGoodsKinds)
 
 
 ////////////poset/////////////////
