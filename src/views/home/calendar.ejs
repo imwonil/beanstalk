@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/home/calender.css">
+  <link rel="stylesheet" href="css/home/calendar.css">
   <link rel="stylesheet" href="css/home/style.css">
   <!-- stylesheet -->
-  <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
-  />
 
   
-  <script src="js/home/calender.js" defer></script>
+  <script src="js/home/calendar.js" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" >
@@ -26,19 +24,14 @@
            .styled-th{
            @apply px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400 text-center;
            }
-        
-
-         .styled-td{
-             @apply py-2 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center;
-               }
 
 
        .focused-page-btn{
-       @apply px-2 py-1 text-sm !text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60;
+       @apply flex justify-center items-center min-w-9 min-h-9 text-white bg-slate-800 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200;
        }
 
          .page-btn{
-       @apply px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100
+       @apply flex justify-center items-center min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200;
          }
 
        .hidden-btn{
@@ -50,28 +43,55 @@
        }
 
 
-     .styled-thead { @apply p-3 font-bold bg-gray-50 text-black border border-gray-300 hidden }
-     .styled-table-row { @apply bg-white flex flex-row flex-wrap mb-10 }
-     .styled-table-data { @apply w-full p-3 text-gray-800 text-center border block relative }
-     .styled-designation { @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold }
+     .styled-thead { @apply p-3 font-bold bg-gray-50 text-black border border-gray-300  }
+
+
+     .styled-number {
+     @apply px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white bg-slate-800 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200;
+     }
+     
+     .styled-span{
+       @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold;
+     }
 
      
-       @screen md{
+
+      .styled-table-row { @apply hover:bg-slate-50 border border-slate-200; }
+      .styled-table-data { @apply p-1 py-5 text-center border text-slate-800; }
+
+     
+      .styled-designation { @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold }
+
+
+     .styled-tr{
+           @apply hover:bg-slate-50 border-b border-slate-200 py-2;
+           }
+
+     .styled-td{
+         @apply block text-center text-sm text-slate-800 p-1 py-3;
+           }
+
+     
+
+        @screen md{
+
+      .styled-thead { @apply table-cell }
+      .styled-table-row:hover { @apply bg-gray-100 }
+      .styled-table-row { @apply table-row flex-row flex-nowrap }
+      .styled-table-data { @apply table-cell w-auto }
+      .styled-designation { @apply hidden }
+        }
+     .styled-span{
+     @apply hidden
+     }
+
+      .styled-tr{
+       @apply table-row flex-row flex-nowrap;
+       } 
+
        .styled-td{
-        @apply px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap text-center;
-          }
-
-     .styled-thead { @apply table-cell }
-     .styled-table-row:hover { @apply bg-gray-100 }
-     .styled-table-row { @apply table-row flex-row flex-nowrap }
-     .styled-table-data { @apply table-cell w-auto }
-     .styled-designation { @apply hidden }
-
-     
-       }
-
-       
-
+       @apply table-cell w-auto;
+       } 
                }
 
 
@@ -294,10 +314,10 @@
 
                 <main class="flex-1 max-h-full overflow-y-auto overflow-hidden">
 
-                  <div x-data="{ openTab: 1 }" class="p-4 w-full m-auto">
+                  <div x-data="{ openTab: 1 }" class="w-full m-auto">
                     <div class=" mx-auto ">
 
-                        <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md w-full md:w-1/2 m-auto">
+                        <div class="mb-4 p-2 flex space-x-4  bg-white rounded-lg shadow-md w-full md:w-1/2 m-auto">
                             <button x-on:click="openTab = 1" :class="{ 'bg-black text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab ">일매출</button>
                             <button x-on:click="openTab = 2" :class="{ 'bg-black text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab">월매출</button>
                           <button x-on:click="openTab = 3" :class="{ 'bg-black text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab">연매출</button>
@@ -306,12 +326,14 @@
 
                            <!--상품 구매 탭 시작 -->
 
-                        <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white p-4 rounded-lg  ">
+                        <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white  rounded-lg  ">
 
 
 
-                          <div class="mt-12 ">
-                            <div class="my-8 flex justify-center gap-12 ">
+                          <div>
+
+                            
+                            <div class="my-12  justify-center gap-12 md:flex hidden">
                               <div class="w-1/5 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                                 <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
@@ -343,7 +365,7 @@
                             </div>
 
 
-                          <div class="flex-1 flex justify-center items-center p-5  ">
+                          <div class="flex-1 flex justify-center items-center  ">
 
 
 
@@ -458,141 +480,185 @@
 
                             </div>
 
-                        <div class="flex flex-col gap-8">
-                            <div class="contents-wrap">
-
-                              <div class="w-full my-5">
-                               <div class='flex justify-center flex-col items-center mt-3'>
-                                 <h2 class=" text-lg font-semibold mb-4 text-black">이용자 결제 내역 조회</h2>
-                                   <div class="flex max-w-md bg-white rounded-lg w-full" x-data="{ search: '' }">
-                                       <div class="w-full">
-                                           <input id="phone-number" type="number" class="w-full h-12 text-gray-800 border border-gray-300 rounded-l-lg focus:outline-none text-center text-md"
-                                               placeholder="이용자 휴대전화 번호 끝 네자리 입력" x-model="search"  oninput='handleOnInput(this, 4)'>
-                                       </div>
-                                       <div>
-
-                                           <button id="search" class="flex items-center bg-black justify-center w-12 h-12 text-white rounded-r-lg"
-                                               :class="(search.length > 0) ? 'bg-purple-500' : 'bg-black'">
-                                               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                   xmlns="http://www.w3.org/2000/svg">
-                                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                               </svg>
-                                           </button>
-
-                                       </div>
-                                   </div>
-                               </div>
-
-                                       </div>
-                              </div>
+                        <div class="p-3 shadow-md rounded-md flex flex-col gap-4">
+                         
 
                             
-                               <div class="contents-wrap">
+                
                               
-                              <div class="pagination-content">
+                                 <!-- component -->
+                                 <div class="max-w-[720px] mx-auto">
 
-                            <section class="container px-4 mx-auto">
-                                <div class="flex flex-col">
+                                      <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
+                                         <a target='_blank' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
+                                                <b>매출 내역 조회</b>
+                                             </a>
+                                     </div>
+
+                                     <div class="w-full flex justify-between items-center mb-3 mt-1 pl-3">
+                                         <div>
+                                             <h3 class="text-lg font-semibold text-slate-800">사용자 정보 조회</h3>
+                                             <p class="text-slate-500">
+                                               회원 검색을 위해 휴대전화 번호의 끝 네 자리를 입력</p>
+                                         </div>
+                                         <div class="ml-3">
+                                             <div class="w-full max-w-sm min-w-[200px] relative">
+                                             <div class="relative">
+                                                 <input
+                                                 class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                                                 placeholder="회원 정보 검색"
+                                                 />
+                                                 <button
+                                                 class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+                                                 type="button"
+                                                 >
+                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+                                                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                                 </svg>
+                                                 </button>
+                                             </div>
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                     <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+                                     <table class="charged-table w-full text-left table-auto ">
+                                         <thead>
+                                         <tr>
+                                             <th class="p-1 py-3 border-b border-slate-200 bg-slate-50 ">
+                                             <p class="text-center text-sm font-normal leading-none text-slate-500">
+                                                 이름
+                                             </p>
+                                             </th>
+                                             <th class="p-1 py-3 border-b border-slate-200 bg-slate-50">
+                                             <p class="text-center text-sm font-normal leading-none text-slate-500">
+                                                 전화번호
+                                             </p>
+                                             </th>
+                                             <th class="p-1 py-3 border-b border-slate-200 bg-slate-50">
+                                             <p class="text-center text-sm font-normal leading-none text-slate-500">
+                                                상품명
+                                             </p>
+                                             </th>
+                                             <th class="p-1 py-3 border-b border-slate-200 bg-slate-50">
+                                             <p class="text-center text-sm font-normal leading-none text-slate-500">
+                                                 결제금액
+                                             </p>
+                                             </th>
+                                             <th class="p-1 py-3 border-b border-slate-200 bg-slate-50">
+                                             <p class="text-center text-sm font-normal leading-none text-slate-500">
+                                                 결제일
+                                             </p>
+                                             </th>
+                                         </tr>
+                                         </thead>
+
+                                       
+                                         <tbody>
+                                         <!-- <tr class="styled-tr">
+                                             <td class="styled-td">
+                                             이재은
+                                             </td>
+                                            <td class="styled-td">
+                                              01089483721
+                                              </td>
+                                            <td class="styled-td">
+                                              고정석
+                                              </td>
+                                            <td class="styled-td">
+                                              100,000
+                                              </td>
+                                             <td class="styled-td">
+                                              241028
+                                              </td>
+                                         </tr>
+
+                                           <tr class="styled-tr">
+                                                <td class="styled-td">
+                                                이재은
+                                                </td>
+                                               <td class="styled-td">
+                                                 01089483721
+                                                 </td>
+                                               <td class="styled-td">
+                                                 고정석
+                                                 </td>
+                                               <td class="styled-td">
+                                                 100,000
+                                                 </td>
+                                                <td class="styled-td">
+                                                 241028
+                                                 </td>
+                                            </tr>
+
+                                           <tr class="styled-tr">
+                                                <td class="styled-td">
+                                                이재은
+                                                </td>
+                                               <td class="styled-td">
+                                                 01089483721
+                                                 </td>
+                                               <td class="styled-td">
+                                                 고정석
+                                                 </td>
+                                               <td class="styled-td">
+                                                 100,000
+                                                 </td>
+                                                <td class="styled-td">
+                                                 241028
+                                                 </td>
+                                            </tr> -->
+                                           
+                                      
+                                         </tbody>
+                                     </table>
+
+                                     <div class="flex justify-center items-center px-4 py-3">
+                                      
+                                         <div class="flex space-x-1">
+
+                                           <button class="first hidden px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                               처음
+                                            </button>
+
+                                           
+                                         <button class="prev px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                             이전
+                                         </button>
 
 
-                                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div class="inline-block min-w-full py-2 align-middle px-2">
-                                            <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                           
+                                           <div class="page-group items-center flex gap-x-3">
 
 
-                                                <table class="charged-table min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                                    <thead class="bg-gray-50 dark:bg-gray-800">
-                                                        <tr>
-                                                            <th scope="col" class="styled-th">
+                                           </div>
+                                           
+                                       <!-- <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white bg-slate-800 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease">
+                                             1
+                                         </button>
+                                         <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                             2
+                                         </button>
+                                         <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                             3
+                                         </button> -->
 
-                                                                        <span>이름</span>
+                                           
+                                         <button class="next px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                             다음
+                                         </button>
 
-
-
-                                                            </th>
-
-                                                            <th scope="col" class="styled-th">
-                                                                전화번호
-                                                            </th>
-
-                                                            <th scope="col" class="styled-th">
-                                                                상품명
-                                                            </th>
-
-
-
-                                                          <th scope="col" class="styled-th">
-                                                              결제금액
-                                                          </th>
-
-                                                          <th scope="col" class="styled-th">
-                                                               결제일
-                                                           </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                           <button class="last hidden px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                                                마지막
+                                            </button>
+                                         </div>
+                                     </div>
+                                     </div>
 
 
+                                 </div>
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-center justify-between mt-6">
-                                    <a href="#" class="page-box first hidden md:flex items-center px-3 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md  hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                                        </svg>
-
-                                        <span>
-                                            처음
-                                        </span>
-                                    </a>
-
-                                    <a href="#" class="page-box prev flex items-center px-3 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md  hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                                          </svg>
-
-                                          <span>
-                                              이전
-                                          </span>
-                                      </a>
-
-                                  <!-- 이 div 자식으로 1, 2, 3 등 페이지 번호가 동적으로 생성 -->
-                                    <div class="page-group items-center flex gap-x-3">
-
-
-                                    </div>
-
-                                    <a href="#" class="page-box next flex items-center px-3 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md  hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                                        <span>
-                                            다음
-                                        </span>
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                                        </svg>
-                                    </a>
-
-                                    <a href="#" class="page-box  last  hidden md:flex items-center px-3 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md  hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                                          <span>
-                                              마지막
-                                          </span>
-
-                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-                                              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                                          </svg>
-                                      </a>
-                                </div>
-                            </section>
-                            </div>
-
-                              </div>
+                         
                           </div>
                             </div>
                           </div>
@@ -607,17 +673,17 @@
                             <table class="monthly-sales-table w-full m-auto">
                                 <thead>
                                     <tr class="styled-table-row">
-                                      <th class="styled-thead">       
+                                      <th class="flex-1 p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell md:w-auto">       
                                         <div class ="day-select">
-                                          <select class="w-1/3 p-2 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" name="selectedMonth">
+                                          <select class="w-1/2 md:w-1/3 p-2 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" name="selectedMonth">
 
                                           </select>
 
                                            <button class="month-choice-btn middle none center rounded-lg border-2 border-gray-400 py-3 px-4 font-sans text-xs text-black transition-all hover:opacity-75 focus:ring active:opacity-[0.85] disabled:pointer-events-none bg-white disabled:opacity-50 disabled:shadow-none z-50 mx-1">선택</button>
 
                                         </div></th>
-                                        <th class="styled-thead">일</th>
-                                        <th class="styled-thead">매출액</th>
+                                        <th class="flex-1  p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell">일</th>
+                                        <th class="flex-1  p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell">매출액</th>
 
                                     </tr>
                                 </thead>
@@ -646,16 +712,18 @@
                             <table class="yearly-sales-table w-full m-auto">
                                 <thead>
                                     <tr class="styled-table-row">
-                                      <th class="styled-thead">       <div class ="month-select">
-                                          <select class="w-1/3 p-2 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" name="selectedYear">
+                                      <th class="flex-1 p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell md:w-auto">       
+                                        <div class ="month-select">
+                                          <select class="w-1/2 md:w-1/3 p-2 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" name="selectedYear">
 
                                           </select>
 
                                            <button class="year-choice-btn middle none center rounded-lg border-2 border-gray-400 py-3 px-4 font-sans text-xs text-black transition-all hover:opacity-75 focus:ring active:opacity-[0.85] disabled:pointer-events-none bg-white disabled:opacity-50 disabled:shadow-none z-50 mx-1">선택</button>
 
                                         </div></th>
-                                        <th class="styled-thead">월</th>
-                                        <th class="styled-thead">매출액</th>
+                                      <th class="flex-1 p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell">월</th>
+                                      <th class="flex-1 p-3 font-bold bg-gray-50 text-black border border-gray-300 md:table-cell">매출액</th>
+
 
                                     </tr>
                                 </thead>

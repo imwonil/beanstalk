@@ -111,6 +111,7 @@ router.get("/calender", ctrl.output.calender)
 router.get("/adminMessage", ctrl.output.adminMessage)
 
 router.get("/admin", ctrl.output.admin)
+router.get("/adminDashboard", ctrl.output.adminDashboard)
 
 
 router.get("/allUserInfo", ctrl.output.allUserInfo)
@@ -118,6 +119,8 @@ router.get("/detailedUserInfo", ctrl.output.detailedUserInfo)
 
 
 router.get("/userGoodsKinds", ctrl.output.userGoodsKinds)
+
+router.get("/calendar", ctrl.output.calendar)
 
 
 ////////////poset/////////////////

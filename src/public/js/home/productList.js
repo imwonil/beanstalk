@@ -10,6 +10,7 @@ const modalMasg = document.querySelector(".suc-modal-text")
 // console.log(warningModal)
 // console.log(sucModal)
 // 
+
 let tebKinde = "고정석"
 
 tebClick(tebKinde);
@@ -25,6 +26,8 @@ const setup = () => {
       isSearchBoxOpen: false,
     }
   }
+
+
  const kioceTotall = []
 //드롭다운은 html 103: 참고
 const timeID =  moment().format('1MMDDhhmmss') 
@@ -41,11 +44,11 @@ const set = document.querySelectorAll('.dropdown-content');
 const TYPE = document.getElementById("seetType")
 
 
+
 TEB.forEach((tebKinde) => {
    tebClick(tebKinde.innerText)
    tebKinde = tebKinde.innerText
 })
-
 
 
 function tebClick(tebKinde) {

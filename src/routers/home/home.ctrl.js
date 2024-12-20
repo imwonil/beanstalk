@@ -77,6 +77,13 @@ const output = {
       res.render("home/userGoodsKinds")
    },
 
+   calendar: (req, res) => {
+      res.render("home/calendar")
+   },
+
+   adminDashboard : (req, res) => {
+      res.render("home/adminDashboard")
+   }
    
 };
 

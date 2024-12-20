@@ -37,18 +37,7 @@ const KOKODATA = JSON.parse(kokoData)
 
     })
                       
-                                
-
-                               
-                       
-
-      
-     
-
-
-
-
-
+                              
 
 })
 } 
