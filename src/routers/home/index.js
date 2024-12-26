@@ -5,6 +5,9 @@ const fs =  require('fs').promises
 const path = require('path')
 
 
+
+
+
 // const ADminGoodsKiosk = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/adminUser/adminGoodsKiosk.json") 
 // const UserGoodsKinds = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/database/userGoodsKinds.json") 
 // const AdminNext = path.join("/home/hosting_users/emc22wonil2/apps/emc22wonil2_emc33wonil/src/adminSetKinds/adminNext.json") 
@@ -16,26 +19,27 @@ fs.readFile("./src/adminUser/adminGoodsKiosk.json")
 const datas = JSON.parse(data)
 
 
+
 router.get('/adminGoodsKiosk', (req,res) =>{
   res.sendfile("./src/adminUser/adminGoodsKiosk.json") 
 })
 
 }).catch((err) => console.error(err));
 
-
 fs.readFile("./src/database/users.json")
 .then((data) => {
   const a = JSON.parse(data);
-  
+
   router.get('/Users', (req, res) => {
     res.sendfile("./src/database/users.json");
   });
 })
 
+
 fs.readFile("./src/database/paymentHistory.json")
 .then((data) => {
   const a = JSON.parse(data);
-  
+
   router.get('/paymentHistory', (req, res) => {
     res.sendfile("./src/database/paymentHistory.json");
   });
@@ -44,7 +48,7 @@ fs.readFile("./src/database/paymentHistory.json")
 fs.readFile("./src/database/userGoodsKinds.json")
 .then((data) => {
   const a = JSON.parse(data);
-  
+
   router.get('/userGoodsKinds', (req, res) => {
     res.sendfile("./src/database/userGoodsKinds.json");
   });
@@ -55,7 +59,7 @@ fs.readFile("./src/database/userGoodsKinds.json")
 fs. readFile("./src/database/first.json")
 .then((data) => {
 const d = JSON.parse(data)
- 
+
 router.get('/certifications', (req,res) =>{
   res.sendfile("./src/database/first.json");
 })
@@ -63,9 +67,9 @@ router.get('/certifications', (req,res) =>{
 
 fs.readFile("./src/adminSetKinds/adminSeet.json")
         .then((data) => {
-          
+
      const b = JSON.parse(data)
-    
+
      router.get('/setKind', (req,res) =>{
       res.sendfile("./src/adminSetKinds/adminSeet.json") 
      })
@@ -93,7 +97,7 @@ fs.readFile("./src/database/kokoTime.json")
     });
   })
   .catch((err) => console.error(err));
-  
+
 
 router.get("/adminindex", ctrl.output.adminindex)
 router.get("/adminSetinfo", ctrl.output.adminSetinfo)
@@ -109,20 +113,6 @@ router.get("/productlist", ctrl.output.productlist)
 router.get("/adminSetproduct", ctrl.output.adminSetproduct)
 router.get("/calender", ctrl.output.calender)
 router.get("/adminMessage", ctrl.output.adminMessage)
-
-router.get("/admin", ctrl.output.admin)
-router.get("/adminDashboard", ctrl.output.adminDashboard)
-
-
-router.get("/allUserInfo", ctrl.output.allUserInfo)
-router.get("/detailedUserInfo", ctrl.output.detailedUserInfo)
-
-
-router.get("/userGoodsKinds", ctrl.output.userGoodsKinds)
-
-router.get("/calendar", ctrl.output.calendar)
-
-
 ////////////poset/////////////////
 
 router.post("/login", ctrl.process.login)
@@ -145,8 +135,5 @@ router.post("/forcibley", ctrl.process.forcibley)
 router.post("/calender", ctrl.process.calender)
 router.post("/changeSeat", ctrl.process.changeSeat)
 router.post("/adminMessage", ctrl.process.adminMessage)
-
-
-// router.post("/admin", ctrl.process.admin)
 
  module.exports = router      

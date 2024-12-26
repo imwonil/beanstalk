@@ -229,14 +229,14 @@ goodsInfo.onclick = () => {enter(e)}
 
     function Search() {
      const UserGoodsPush =   JSON.parse(userGoodsPush)
-   fetch('/users')
+   fetch('/Users')
    .then(res => res.json())
    .then(data => { 
  const userPhone = document.getElementById("userPhone").value
        
      const u_p_indexOf  =  data.phon.indexOf(userPhone)
       
-     if(!userPhone) {return alert("전화번를 입력해주세요")}
+     if(!userPhone) {return alert("전화번호를 입력해주세요")}
      if(u_p_indexOf === -1){return alert("회원이 존재하지 않습니다")}
      name.innerText =   data.name[u_p_indexOf]
      phone.innerText = data.phon[u_p_indexOf]

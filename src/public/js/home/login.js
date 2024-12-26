@@ -305,12 +305,7 @@ findAnchor.forEach((ele)=>{
                   }
 
                   if(certification.value !== res.search) {
-                    
-                    
-                 
-                  
-
-                      warningModalText.innerHTML = "인증번호가 일치 하지 않습니다."
+                     warningModalText.innerHTML = "인증번호가 일치 하지 않습니다."
                        warningModal.classList.toggle("hidden")
                        setTimeout(() => {
               
@@ -771,7 +766,7 @@ tab.forEach((ele)=>{  //tab 클릭시 반응하는 함수
                 warningModalText.innerHTML = "상품이 존재하지 않습니다."
   
 
-             location.href = "/login"
+             // location.href = "/login"
           }
 
 
@@ -868,7 +863,7 @@ tab.forEach((ele)=>{  //tab 클릭시 반응하는 함수
               warningModal.classList.toggle("hidden")
                 warningModalText.innerHTML = "퇴실할 상품이 없습니다."
               
-               location.href = "/login"
+              location.href = "/login"
           }
 
                       }   else if (res.success === false) {    warningModalText.innerHTML = `${res.msg}`
@@ -900,7 +895,8 @@ tab.forEach((ele)=>{  //tab 클릭시 반응하는 함수
 
                           }).then((res) => res.json())
                             .then((res) => {
-                                                 if (res.success) {
+                                                 
+                              if (res.success) {
 
 
                                                    sucModalText.innerHTML = "퇴실 처리 되었습니다."
@@ -937,54 +933,57 @@ tab.forEach((ele)=>{  //tab 클릭시 반응하는 함수
       // }).then((res) => res.json())
       //   .then((data) => { })
 
-    }    if(TAB === "문열기") { 
-      console.log("문열기")
-    const enterId=document.querySelector("#enterId")
-    const enterPassword = document.querySelector("#enterPassword")
-    const enterNext = document.querySelector("#enterNext")
-enterNext.addEventListener("click", next) 
+    }   
+    
+    
+//     if(TAB === "문열기") { 
+//       console.log("문열기")
+//     const enterId=document.querySelector("#enterId")
+//     const enterPassword = document.querySelector("#enterPassword")
+//     const enterNext = document.querySelector("#enterNext")
+// enterNext.addEventListener("click", next) 
 
-function next() {
+// // function next() {
 
-//  const combine= enterId.value + enterPassword.value
- const req = {
-  id: enterId.value,
-  psword: enterPassword.value
- }
+// // //  const combine= enterId.value + enterPassword.value
+// //  const req = {
+// //   id: enterId.value,
+// //   psword: enterPassword.value
+// //  }
 
- fetch("/enter", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(req),
+// //  fetch("/enter", {
+// //   method: "POST",
+// //   headers: {
+// //     "Content-Type": "application/json",
+// //   },
+// //   body: JSON.stringify(req),
 
-}).then((res) => res.json())
-  .then((res) => {
-    console.log(res)
-   if(res.success === true) {
+// // }).then((res) => res.json())
+// //   .then((res) => {
+// //     console.log(res)
+// //    if(res.success === true) {
 
-    location = "/login"
+// //     location = "/login"
 
-   }else if(res.success === false){
-      sucModalText.innerHTML = `${res.mag}`
-      sucModal.classList.toggle("hidden")
-
-
-   }else if(res === "goodsfalse") {
+// //    }else if(res.success === false){
+// //       sucModalText.innerHTML = `${res.mag}`
+// //       sucModal.classList.toggle("hidden")
 
 
-      warningModal.classList.toggle("hidden")
-       warningModalText.innerHTML = "상품이 존재 하지 않습니다."
+// //    }else if(res === "goodsfalse") {
+
+
+// //       warningModal.classList.toggle("hidden")
+// //        warningModalText.innerHTML = "상품이 존재 하지 않습니다."
      
-location = "/login"
-   }
+// // location = "/login"
+// //    }
 
 
-  })
-}
+// //   })
+// // }
 
-    }
+//     }
 
   })
 })

@@ -35,6 +35,49 @@
   <style>
     [x-cloak] { display: none !important; }
   </style>
+
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .styled-th{
+      @apply p-3 font-bold  bg-gray-50 text-black border border-gray-300 hidden
+      }
+    .styled-tr{
+          @apply bg-white flex flex-row flex-wrap mb-10;
+          }
+
+    .styled-td{
+        @apply w-full p-3 text-gray-800 text-center border border-b block relative;
+          }
+
+      .styled-span{
+        @apply absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold;
+      }
+
+      @screen md{
+      .styled-th{
+      @apply table-cell;
+      }
+
+      .styled-tr:hover{
+      @apply bg-gray-100;
+      }
+
+      .styled-tr{
+      @apply table-row flex-row flex-nowrap;
+      } 
+
+      .styled-td{
+      @apply table-cell w-auto;
+      } 
+
+      .styled-span{
+      @apply hidden
+      }
+
+          }
+    }
+  </style>
+
   
 </head>
 
@@ -63,7 +106,7 @@
                      <h2 class=" font-semibold mb-4 text-black">이용자 검색</h2>
                        <div class="flex max-w-md bg-white rounded-lg w-full" x-data="{ search: '' }">
                            <div class="w-full">
-                               <input id="userPhone" type="search" class="w-full h-12 text-gray-800 border-gray-300 rounded-l-lg focus:outline-none text-center"
+                               <input id="userPhone" class="border w-full h-12 text-gray-800 border-gray-300 rounded-l-lg focus:outline-none text-center"
                                    placeholder="사용자 이름 or 휴대폰 번호 검색" x-model="search">
                            </div>
                            <div>
@@ -94,9 +137,9 @@
 
                        <tbody id="searchIdPsword"> <thead>
                         <tr>
-                            <th id="name"class="styled-th"></th>
-                            <th id="phone"class="styled-th"></th>
-                           <th id="choice"class="styled-th"></th>
+                            <td id="name"class="styled-td"></td>
+                            <td id="phone"class="styled-td"></td>
+                           <td id="choice"class="styled-td"></td>
                         </tr>
                     </thead>
 
@@ -375,7 +418,7 @@
 <!-- 사용자 찾기 -->
                                          <div class="my-5">
                                          <p class="mb-2">유효기간(미입력시 무제한)</p>
-                                          <input id ="expiry-date"type="text" class="border border-gray-300 w-full rounded-lg" placeholder="단위: 1일(30입력 30일로 계산)">
+                                          <input id ="expiry-date"type="text" class="border border-gray-300 w-full rounded-lg p-2" placeholder="단위: 1일(30입력 30일로 계산)">
                                          </div>
 
                                        <!-- <div class="my-5">

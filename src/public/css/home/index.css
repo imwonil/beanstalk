@@ -95,7 +95,7 @@ body {
   grid-area: studyLounge;
   border: 3px solid gray;
   display: inline-block;
-  height: 30vh;
+  height: 40vh;
   width: 800px;
   box-sizing: border-box;
   margin-left: auto;
