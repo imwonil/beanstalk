@@ -113,6 +113,8 @@ router.get("/productlist", ctrl.output.productlist)
 router.get("/adminSetproduct", ctrl.output.adminSetproduct)
 router.get("/calender", ctrl.output.calender)
 router.get("/adminMessage", ctrl.output.adminMessage)
+router.get("/adminDashboard", ctrl.output.adminDashboard)
+router.get("/allUserInfo", ctrl.output.allUserInfo)
 ////////////poset/////////////////
 
 router.post("/login", ctrl.process.login)

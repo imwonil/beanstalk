@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +35,7 @@
    <!--fontawesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-    
+
       <style>
         [x-cloak] { display: none !important;}
       </style>
@@ -48,7 +46,6 @@
         @apply [&>div]:flex [&>div]:items-center [&>div]:justify-center 
         [&>div]:gap-2 [&>div]:my-2;
        }
-
         .keyboard-btn {
         @apply [&>button]:bg-gray-900 [&>button]:border [&>button]:w-14 [&>button]:p-2 [&>button]:text-white [&>button]:rounded-md [&>button]:text-center [&>button]:text-2xl;
         }
@@ -69,12 +66,12 @@
          @apply mt-6 space-y-4;
         }
 
-        
+
 
             }
-      
+
     </style>
-  
+
 <body class="h-screen flex-1 max-h-full overflow-y-auto overflow-hidden">
 
     <!-- 아이디/비밀번호 찾기 -->
@@ -145,8 +142,9 @@
             </div>
           </div>
 
+
          </div>
-    
+
     <div class=" w-full h-screen fixed flex items-center justify-center transition-all duration-300 find-modal hidden">
       <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
       <div class=" bg-white rounded-lg p-6 w-96 max-w-full shadow-lg transform">
@@ -180,7 +178,7 @@
     <!-- 입실 기능  -->
     <div class="z-10 h-screen fixed flex items-center justify-center checkin-modal  w-full hidden">
     <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
-    
+
           <div class=" bg-white rounded-lg p-6 shadow-lg transform transition-all duration-300">
               <!--입실 헤더 -->
               <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
@@ -255,7 +253,7 @@
                         </div>
 
                    </div>
-         
+
               </div>
 
 
@@ -263,17 +261,17 @@
           </div>
       </div>
 
-    
-    
+
+
   <div x-data="{ openTab: 1 }" class="p-4 flex justify-center items-center h-auto ">
     <div class="w-full md:w-1/2 mx-auto ">
-       
+
         <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md flex-1">
             <button x-on:click="openTab = 1" :class="{ 'bg-black text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">로그인</button>
             <button x-on:click="openTab = 2" :class="{ 'bg-black text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">문열기</button>
           <button x-on:click="openTab = 3" :class="{ 'bg-black text-white': openTab === 3 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 tab" data-alt = "tab1">로그아웃</button>
         </div>
-  
+
   <div x-cloak x-show="openTab === 1" class="transition-all duration-300 bg-white rounded-lg border-black flex-1">
 
 
@@ -281,7 +279,7 @@
     <div id="tab1" class="flex flex-col shadow-xl md:bg-gray-100 w-full ">
         <!-- 카드 컨테이너 -->
         <div class="grid place-items-center mx-2 my-6 ">
-  
+
 
 
             <!-- 카드 -->
@@ -290,7 +288,7 @@
 
                 <!-- 카드 타이틀 -->
                    <h3 class="font-bold text-3xl">BEAN<span class="text-[#6ab04c] text-3xl">STALK</span></h3>
-                
+
                 <h2 class="mt-3 text-center font-semibold text-3xl lg:text-4xl text-gray-800">
                     로그인
                 </h2>
@@ -331,7 +329,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
     </div>
@@ -395,7 +393,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -457,19 +455,19 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
            <!--퇴실 탭 종료-->
-        
-   
+
+
   </div>
   </div>
   <!--회원 정보 수정 -->
-  <div class=" flex items-center justify-center z-30 change-modal h-screen fixed">
+  <div class="  flex items-center justify-center z-50 change-modal fixed inset-0 hidden">
 
     <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
 
@@ -483,18 +481,18 @@
 
         <!-- Modal Content -->
         <div class="mt-6 space-y-4">
-          
+
 
                        <div x-data="{ openTab: 1 }">
               <div class="mx-auto ">
 
-               
+
 
             </div>
               </div>
              <!--남자/여자 선택 부분 종료-->
 
-            
+
             <input type="text" id="changPhone" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="전화번호">
             <input type="text" id="changPsword" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="비밀번호">
             <input type="text" id="changConfirm-psword" class="outline-none w-full text-center p-1 py-2 bg-gray-100 focus:bg-white rounded-lg my-2" placeholder="비밀번호 확인">
@@ -513,7 +511,7 @@
         <div class="hidden">
           <textarea></textarea>
         </div>
-        
+
        <div class="bg-black/90 p-3 rounded-lg flex items-center justify-center flex-col [&>div]:m-1 [&>div>button]:bg-gray-900 [&>div>button]:border [&>div>button]:text-white [&>div>button]:rounded-md [&>div>button]:text-center">
 
          <!--요 바로 위에 있는 거는 맨 윗줄과 아랫줄만 통제함..-->
@@ -529,7 +527,7 @@
           <button class="btn">8</button>
           <button class="btn">9</button>
           <button class="btn">0</button>
-      
+
        </div>
 
 
@@ -635,6 +633,59 @@
 
      <!-- 가상 키보드 종료-->
 
+    <form name="form" method="post">
+
+      <div class="a">
+
+      <table>	
+        <tr align="center">
+
+        </tr>
+      </table> 
+
+
+       <li><a id="cads"> </a></li> 
+
+
+    <h2 id="cad"> <h2>
+
+    <from>  
+    <table align="center" cellspacing="0" cellpadding="0" >
+    <tr bgcolor="blue" align ="center">	</tr>
+    <td style="display:none" ><input type="radio" name="myRadios" onclick="handleClick();" value="credit_cancel"/>신용ddd취소</td>
+    <td style="display:none" ><input type="radio" id ="cancel"name="myRadios" />신용취소</td>
+
+    <tr align="left" style="display:none" >
+      <td >할부 : <input type="text" name="halbu" value="00"></td>
+        <!-- 아래부분 결재 금액  -->
+      <td type="text" id = "Money"name="money" > 상품 구매 </td>  
+    </tr>
+
+    <br>
+    <!-- SendDdata : 결제해 해당  데이타 보냄 RecvData 보낸 데이타정보를 받아옴 -->
+    <input style="display:none" type="text" name="SendData" size="100"><br><br>
+    <textarea style="display:none" name="RecvData" cols="100" rows="5"></textarea>
+    <br><br>
+
+    <div class="modal hidden">
+
+      <div class="bg"></div>  
+         <div class="modalBox">
+          <h2 id="feeCancal" style="text-align: center;" ></h2> </h2>
+              <div class = "menuCategory"> 
+              <li><a href="javascript:reqVCAT_HTTP()"> 결제 취소</a></li> 
+              <li><a class="closeBtn " href="/login">닫기</a></li> 
+             </div>
+
+      </div>
+    </div>
+
+    </div>
+
+
+
+    </form>
+
     <footer class="footer bg-[#EFEFEF] flex items-center justify-between flex-shrink-0 p-4 border-t max-h-14">
       <div>BEANSTALK &copy; 2024</div>
     </footer>
@@ -642,6 +693,8 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 
 
+
+
         <script src="js/home/login.js" defer></script>
 </body>
-</html>  
+</html> 

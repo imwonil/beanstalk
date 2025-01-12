@@ -117,7 +117,20 @@ function makeHistoryRow(filteredData){
 }
 
 
+//강제 오픈 모달 관련 js
+const forcedOpen = document.getElementById("forced-open")
+const forcedOpenModal = document.getElementById("forced-open-modal")
+const doorOpenBtn = document.getElementById("door-open-btn")
+const openCancelBtn = document.getElementById("open-cancel-btn")
 
+forcedOpen.addEventListener("click", ()=>{
+  forcedOpenModal.classList.toggle("hidden")
+})
+
+
+openCancelBtn.addEventListener("click", ()=>{
+  forcedOpenModal.classList.toggle("hidden")
+})
 
 
 

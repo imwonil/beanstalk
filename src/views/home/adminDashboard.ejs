@@ -23,6 +23,16 @@
         .styled-td{
        @apply p-2 py-4 whitespace-nowrap text-sm font-normal text-gray-900 text-center;
         }
+
+         .toggle-checkbox:checked {
+           @apply: right-0 border-green-400;
+           right: 0;
+           border-color: #68D391;
+         }
+         .toggle-checkbox:checked + .toggle-label {
+           @apply: bg-green-400;
+           background-color: #68D391;
+         }
             }
 
 
@@ -30,6 +40,43 @@
 
 
 <body>
+
+     <!--강제 오픈 모달 시작-->
+     <div id="forced-open-modal" class="justify-center flex items-center h-screen fixed w-full z-50 hidden"> 
+          <div class="fixed absolute inset-0 bg-gray-300 bg-opacity-75"></div>
+      
+         <div class="flex items-center justify-center w-full md:w-1/3 z-50">
+             <div class="bg-white rounded-lg p-6 w-full shadow-lg transform transition-all duration-300 ">
+                 <!-- 모달 헤더 -->
+                 <div class="flex justify-between items-center border-b-2 border-gray-200 pb-4">
+
+                     <h1 id ="resaveName"class="text-xl font-semibold">문 강제 오픈</h1>
+
+                 </div>
+                 <div class="mt-6 text-center">
+
+                     <h2>문을 강제로 여시겠습니까?</h2>
+            
+                                  <!--강제오픈/취소 버튼 시작-->
+                               <div class=" py-3 flex-col flex">
+                                 <button id = "door-open-btn"class="save-btn mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-500 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 md:ml-3 md:w-auto md:text-sm">강제오픈</button>
+                            
+                                 <button id ="open-cancel-btn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 md:ml-3 md:w-auto md:text-sm"> 취소 </button>                       
+                                 <!--강제오픈/취소 버튼  버튼 종료 -->
+
+                               </div>
+                           </div>
+
+
+            
+
+
+                             </div>
+
+                     </div>
+
+         </div>
+                 </div>
 
     
 
@@ -110,7 +157,6 @@
                       <span class="ml-4 text-white flex-1 whitespace-nowrap">좌석 현황</span>
                    </a>
 
-
                   <a href="/adminProductlist" target="_blank" class="flex items-center px-6 py-2 mt-4 text-gray-100  bg-opacity-25 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                      <span class='text-center w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75'>
                         <i class="fa-regular fa-bookmark "></i>
@@ -119,6 +165,14 @@
                       <span class="ml-4 text-white flex-1 whitespace-nowrap">이용권/마일리지 설정</span>
                    </a>
 
+                      <a href="#" id="forced-open" class="flex items-center px-6 py-2 mt-4 text-gray-100  bg-opacity-25 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                          <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                            <span class="ml-4 text-white flex-1 whitespace-nowrap">강제오픈</span>
+                         </a>
+
+
+                   
+
                   <a href="#" class="flex items-center px-6 py-2 mt-4 text-gray-100  bg-opacity-25 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                       <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                          <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
@@ -126,6 +180,9 @@
                       <span class="ml-4 text-white flex-1 whitespace-nowrap">로그아웃</span>
                    </a>
 
+
+
+                 
                   
                   
                </nav>
@@ -141,14 +198,7 @@
                        </button>
 
                        <div class="relative w-full ml-4 lg:mx-0">
-                           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                               <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                                   <path
-                                       d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                   </path>
-                               </svg>
-                           </span>
+                       
 
                            <div class="relative">
                                 <input
@@ -167,65 +217,17 @@
                        </div>
                    </div>
 
-                   <div class="flex items-center">
-                       <div x-data="{ notificationOpen: false }" class="relative">
-                           <button @click="notificationOpen = ! notificationOpen"
-                               class="flex text-gray-600 focus:outline-none">
-                               <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                   <path
-                                       d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
-                                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                   </path>
-                               </svg>
-                           </button>
-
-                           <div x-show="notificationOpen" @click="notificationOpen = false"
-                               class="fixed inset-0 z-10 w-full h-full" style="display: none;"></div>
-
-                           <div x-show="notificationOpen"
-                               class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80"
-                               style="width: 20rem; display: none;">
-                               <a href="#"
-                                   class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                                   <img class="object-cover w-8 h-8 mx-1 rounded-full"
-                                       src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=334&amp;q=80"
-                                       alt="avatar">
-                                   <p class="mx-2 text-sm">
-                                       <span class="font-bold" href="#">Sara Salah</span> replied on the <span
-                                           class="font-bold text-indigo-400" href="#">Upload Image</span> artical . 2m
-                                   </p>
-                               </a>
-                               <a href="#"
-                                   class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                                   <img class="object-cover w-8 h-8 mx-1 rounded-full"
-                                       src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
-                                       alt="avatar">
-                                   <p class="mx-2 text-sm">
-                                       <span class="font-bold" href="#">Slick Net</span> start following you . 45m
-                                   </p>
-                               </a>
-                               <a href="#"
-                                   class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                                   <img class="object-cover w-8 h-8 mx-1 rounded-full"
-                                       src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=334&amp;q=80"
-                                       alt="avatar">
-                                   <p class="mx-2 text-sm">
-                                       <span class="font-bold" href="#">Jane Doe</span> Like Your reply on <span
-                                           class="font-bold text-indigo-400" href="#">Test with TDD</span> artical . 1h
-                                   </p>
-                               </a>
-                               <a href="#"
-                                   class="flex items-center px-4 py-3 -mx-2 text-gray-600 hover:text-white hover:bg-indigo-600">
-                                   <img class="object-cover w-8 h-8 mx-1 rounded-full"
-                                       src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=398&amp;q=80"
-                                       alt="avatar">
-                                   <p class="mx-2 text-sm">
-                                       <span class="font-bold" href="#">Abigail Bennett</span> start following you . 3h
-                                   </p>
-                               </a>
-                           </div>
-                       </div>
-
+                   <div class="flex items-center border-b">
+                   
+                           <span class="text-xs mr-2 font-bold text-gray-600">자동문 완전 개방</span>
+                           <!--자동문 완전 개방 버튼 -->
+                               <div  class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in  float-right md:float-none">
+                                   
+                                     <input  type="checkbox" name="toggle" id="toggle" class="toggle tkaka toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                     <label  for="toggle" class=" toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                 </div>
+                               
+    
                     
                    </div>
                </header>
